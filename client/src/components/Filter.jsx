@@ -1,7 +1,5 @@
 import { Component } from 'react';
 
-class Filter extends Component {
+export default class Filter extends Component {
     
 }
-
-export default Filter;
