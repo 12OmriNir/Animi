@@ -6,7 +6,7 @@ const ProductPreview = ({ product }) => {
     <div className="col-3 mb-1">
       <div className="card border-0">
         <div className="card-body">
-          <Link to="/product">
+          <Link to={`/product/${product.id}`}>
             <img
               src={product.imgUrl}
               style={{ width: "75%", height: "75%", objectFit: "cover" }}
