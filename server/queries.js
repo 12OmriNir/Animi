@@ -6,18 +6,22 @@ async function addProduct(req, res) {
     id: shortid.generate(),
     name: req.body.name,
     category: req.body.category,
+    origin: req.body.origin,
+    character: req.body.character,
     description: req.body.description,
     price: req.body.price,
     is_in_stock: req.body.isInStock,
     image_url: req.body.imageUrl,
   };
   try {
-    let string = `INSERT INTO animi.products (id,product_name,category,description,price,is_in_stock,image_url) VALUES
-         ($1,$2,$3,$4,$5,$6,$7)`;
+    let string = `INSERT INTO animi.products (id,product_name,category,origin,character,description,price,is_in_stock,image_url) VALUES
+         ($1,$2,$3,$4,$5,$6,$7,$8,$9)`;
     const params = [
       newProduct.id,
       newProduct.name,
       newProduct.category,
+      newProduct.origin,
+      newProduct.character,
       newProduct.description,
       newProduct.price,
       newProduct.is_in_stock,
