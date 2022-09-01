@@ -14,7 +14,7 @@ export default class Filter extends Component {
       franchiseFilter: "",
       priceMinFilter: 0,
       priceMaxFilter: 0,
-      inStockFilter: "Undecided",
+      inStockFilter: "Any",
       categoryFilter: "",
       characters: [],
       origins: [],
@@ -193,7 +193,7 @@ export default class Filter extends Component {
     } else if (document.querySelector("#inStock3").checked) {
       inStock = "Yes";
     } else {
-      inStock = "Undecided";
+      inStock = "Any";
     }
     this.setState({
       inStockFilter: inStock,
