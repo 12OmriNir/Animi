@@ -3,20 +3,27 @@
 // =============== //
 
 import React, { Component } from 'react'
+//import { Link } from 'react-router-dom'
 
 export default class ProductPage extends Component {
     constructor(props) {
-        super(props);
+        super(props)
+
+        this.state = {
+            product: {}
+        }
     }
 
     componentDidMount() {
-        
+
     }
 
     render() {
 
         const { products } = this.props
         const { id, name, title, description, price, category, inStock, imageUrl } = products[0];
+
+        console.log(id + name + title + description + price + category + inStock + imageUrl)
 
         console.log(this.props)
 
@@ -40,6 +47,18 @@ export default class ProductPage extends Component {
                     </div>
                 </div>
             </div>
+
+            /*
+            <div className="card" style="width:400px">
+                <div className="card-body">
+                    <h4 className="card-title">{title}</h4>
+                    <p className="card-text">{description}</p>
+                    <Link to={'/purcheses'}>
+                        <button type="button" className="btn btn-success">Buy Now !</button>
+                    </Link>
+                </div>
+            </div>
+            */
         )
     }
 }
