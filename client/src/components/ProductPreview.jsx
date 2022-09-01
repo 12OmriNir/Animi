@@ -3,20 +3,20 @@ import { Link } from "react-router-dom";
 
 const ProductPreview = ({ product }) => {
   return (
-    <div className="col-3 mb-1">
-      <div className="card border-0">
+    <div className="col-12 col-sm-3">
+      <div className="card">
         <div className="card-body">
           <Link to={`/product/${product.id}`}>
             <img
-              src={product.imgUrl}
-              style={{ width: "75%", height: "75%", objectFit: "cover" }}
+              src={product.image_url}
+              class="img-fluid"
             />
           </Link>
-          <Link className="text-decoration-none link-light" to="/product">
-            <h5>{product.title}</h5>
+          <Link className="text-decoration-none link-dark" to="/product">
+            <h5>{product.product_name}</h5>
           </Link>
           <p className="text-secondary">Price: ${product.price}</p>
-          <p className="text-danger">{product.inStock ? '' : 'Out of stock'}</p>
+          <p className="text-danger">{product.is_in_stock ? '' : 'Out of stock'}</p>
         </div>
       </div>
     </div>
