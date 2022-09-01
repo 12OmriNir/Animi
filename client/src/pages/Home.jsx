@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ProductsList from "../components/ProductsList";
+import Filter from '../components/Filter';
 
 export default class Home extends Component {
   constructor(props) {
@@ -16,6 +17,37 @@ export default class Home extends Component {
     });
   }
 
+  filterProducts = (nameFilter, titleFilter, descFilter, priceMinFilter, priceMaxFilter, inStockFilter, categoryFilter) => {
+    console.log(nameFilter);
+    console.log(titleFilter);
+    console.log(descFilter);
+    console.log(priceMinFilter);
+    console.log(priceMaxFilter);
+    console.log(inStockFilter);
+    console.log(categoryFilter);
+    this.setState({
+      products: this.state.products.filter((product) => {
+          const nameCheck = nameFilter ? nameFilter : product.productName;
+          const titleCheck = titleFilter ? titleFilter : product.title;
+          const descCheck = descFilter ? descFilter : product.description;
+          const priceMinCheck = priceMinFilter ? priceMinFilter : product.price;
+          const priceMaxCheck = priceMaxFilter ? priceMaxFilter : product.price;
+          const inStockCheck = inStockFilter ? inStockFilter : product.inStock;
+          const categoryCheck = categoryFilter ? categoryFilter : product.category;
+          if ((product.productName.toUpperCase().includes(String(nameCheck).toUpperCase()))
+          && (product.title.toUpperCase().includes(String(titleCheck).toUpperCase()))
+          && (product.description.toUpperCase().includes(String(descCheck).toUpperCase()))
+          && (product.price >= priceMinCheck)
+          && (product.price <= priceMaxCheck)
+          && (product.inStock === inStockCheck)
+          && (product.category.toUpperCase().includes(String(categoryCheck).toUpperCase()))
+          ) {
+              return product;
+          }
+      })
+    });
+  }
+
   render() {
     const { products } = this.state;
     return (
@@ -23,7 +55,9 @@ export default class Home extends Component {
         <div className="col-9 row">
           <ProductsList products={products} />
         </div>
-        <div className="col-3 row"/>
+        <div className="col-3 row">
+          <Filter filterProducts={this.filterProducts}/>
+        </div>
       </div>
     );
   }
@@ -126,7 +160,7 @@ const products = [
     category: "Figure",
   },
   {
-    id: "5",
+    id: "9",
     productName: "doll42",
     title: "Chibi Eren Yegar",
     description: "height: 14cm",
@@ -137,7 +171,7 @@ const products = [
     category: "Figure",
   },
   {
-    id: "5",
+    id: "10",
     productName: "doll42",
     title: "Chibi Eren Yegar",
     description: "height: 14cm",
@@ -148,7 +182,7 @@ const products = [
     category: "Figure",
   },
   {
-    id: "5",
+    id: "11",
     productName: "doll42",
     title: "Chibi Eren Yegar",
     description: "height: 14cm",
@@ -159,7 +193,7 @@ const products = [
     category: "Figure",
   },
   {
-    id: "5",
+    id: "12",
     productName: "doll42",
     title: "Chibi Eren Yegar",
     description: "height: 14cm",
@@ -170,7 +204,7 @@ const products = [
     category: "Figure",
   },
   {
-    id: "5",
+    id: "13",
     productName: "doll42",
     title: "Chibi Eren Yegar",
     description: "height: 14cm",
@@ -181,7 +215,7 @@ const products = [
     category: "Figure",
   },
   {
-    id: "5",
+    id: "14",
     productName: "doll42",
     title: "Chibi Eren Yegar",
     description: "height: 14cm",
@@ -192,7 +226,7 @@ const products = [
     category: "Figure",
   },
   {
-    id: "5",
+    id: "15",
     productName: "doll42",
     title: "Chibi Eren Yegar",
     description: "height: 14cm",
@@ -203,7 +237,7 @@ const products = [
     category: "Figure",
   },
   {
-    id: "5",
+    id: "16",
     productName: "doll42",
     title: "Chibi Eren Yegar",
     description: "height: 14cm",
@@ -214,7 +248,7 @@ const products = [
     category: "Figure",
   },
   {
-    id: "5",
+    id: "17",
     productName: "doll42",
     title: "Chibi Eren Yegar",
     description: "height: 14cm",
@@ -225,7 +259,7 @@ const products = [
     category: "Figure",
   },
   {
-    id: "5",
+    id: "18",
     productName: "doll42",
     title: "Chibi Eren Yegar",
     description: "height: 14cm",
@@ -236,7 +270,7 @@ const products = [
     category: "Figure",
   },
   {
-    id: "5",
+    id: "19",
     productName: "doll42",
     title: "Chibi Eren Yegar",
     description: "height: 14cm",
@@ -247,7 +281,7 @@ const products = [
     category: "Figure",
   },
   {
-    id: "5",
+    id: "20",
     productName: "doll42",
     title: "Chibi Eren Yegar",
     description: "height: 14cm",

@@ -14,7 +14,7 @@ export default class Filter extends Component {
   newTextFilter = (id, label, name, value) => {
     return (
         <div className="list-group-item">
-            <label for={id}>{label}</label>
+            <label htmlFor={id}>{label}</label>
             <input id={id} type="text" className="form-control" name={name} onChange={this.onValueUpdate} value={value}/>
         </div>
     )
@@ -23,7 +23,7 @@ export default class Filter extends Component {
   newNumberFilter = (id, label, name, value) => {
     return (
         <div className="list-group-item">
-            <label for={id}>{label}</label>
+            <label htmlFor={id}>{label}</label>
             <input id={id} type="number" className="form-control" name={name} onChange={this.onValueUpdate} value={value}/>
         </div>
     )
@@ -33,64 +33,25 @@ export default class Filter extends Component {
     return (
         <div>
             <div className="form-check form-check-inline">
-                <input className="form-check-input" type="radio" name={name} id="inStock1" value="option1" onChange={this.onToggleUpdate}/>
-                <label className="form-check-label" for="inStock1">{label1}</label>
+                <input className="form-check-input" type="radio" name={name} id="inStock1" value="option1" onChange={this.onToggleUpdate} defaultChecked/>
+                <label className="form-check-label" htmlFor="inStock1">{label1}</label>
             </div>
             <div className="form-check form-check-inline">
                 <input className="form-check-input" type="radio" name={name} id="inStock2" value="option2" onChange={this.onToggleUpdate}/>
-                <label className="form-check-label" for="inStock2">{label2}</label>
+                <label className="form-check-label" htmlFor="inStock2">{label2}</label>
             </div>
             <div className="form-check form-check-inline">
                 <input className="form-check-input" type="radio" name={name} id="inStock3" value="option3" onChange={this.onToggleUpdate}/>
-                <label className="form-check-label" for="inStock3">{label3}</label>
+                <label className="form-check-label" htmlFor="inStock3">{label3}</label>
             </div>
         </div>
     )
   }
 
   onFilterChange = () => {
-    let newList = this.props.products;
-    newList.filter((product) => {
-        const nameCheck = this.state.nameFilter ? this.state.nameFilter : product.name;
-        const titleCheck = this.state.titleFilter ? this.state.titleFilter : product.title;
-        const descCheck = this.state.descFilter ? this.state.descFilter : product.description;
-        const priceMinCheck = this.state.priceMinFilter ? this.state.priceMinFilter : product.price;
-        const priceMaxCheck = this.state.priceMaxFilter ? this.state.priceMaxFilter : product.price;
-        const inStockCheck = this.state.inStockFilter ? this.state.inStockFilter : product.inStock;
-        const categoryCheck = this.state.categoryFilter ? this.state.categoryFilter : product.category;
-        if ((product.name.toUpperCase().includes(String(nameCheck).toUpperCase()))
-         && (product.title.toUpperCase().includes(String(titleCheck).toUpperCase()))
-         && (product.description.toUpperCase().includes(String(descCheck).toUpperCase()))
-         && (product.price >= priceMinCheck)
-         && (product.price <= priceMaxCheck)
-         && (product.inStock === inStockCheck)
-         && (product.category.toUpperCase().includes(String(categoryCheck).toUpperCase()))
-        ) {
-            return product;
-        }
-    })
-    this.props.updateProducts(newList);
+    const { nameFilter, titleFilter, descFilter, priceMinFilter, priceMaxFilter, inStockFilter, categoryFilter} = this.state;
+    this.props.filterProducts(nameFilter, titleFilter, descFilter, priceMinFilter, priceMaxFilter, inStockFilter, categoryFilter);
   }
-
-  /*
-
-  (For importing:)
-  ================
-  import Filter from '../components/Filter';
-
-  (Inside the col:)
-  =================
-  <Filter products={products} updateProducts={this.updateProducts}/>
-
-  (Inside the component:)
-  =========================
-  updateProducts = (filteredProducts) => {
-    this.setState({
-        products: filteredProducts
-    });
-  }
-
-  */
 
   onValueUpdate = (e) => {
     this.setState((state) => {
@@ -119,19 +80,19 @@ export default class Filter extends Component {
     return (
       <section>
         <div>
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">Filters</h5>
+          <div className="card">
+            <div className="card-body">
+              <h5 className="card-title">Filters</h5>
             </div>
-            <ul class="list-group list-group-flush">
+            <ul className="list-group list-group-flush">
               {this.newTextFilter("nameSearch", "(Name):", "nameFilter", nameFilter)}
               {this.newTextFilter("titleSearch", "(Title):", "titleFilter", titleFilter)}
               {this.newTextFilter("descSearch", "(Description):", "descFilter", descFilter)}
-              <div class="row">
-                <div class="col">
+              <div className="row">
+                <div className="col">
                     {this.newNumberFilter("priceMinSearch", "(Price:) Min:", "priceMinFilter", priceMinFilter)}
                 </div>
-                <div class="col">
+                <div className="col">
                     {this.newNumberFilter("priceMaxSearch", "Max:", "priceMaxFilter", priceMaxFilter)}
                 </div>
               </div>
