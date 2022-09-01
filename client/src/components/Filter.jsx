@@ -27,7 +27,7 @@ export default class Filter extends Component {
     this.setState({
       characters: ["one", "two", "three"],
       origins: ["one", "two", "three"],
-      categories: ["one", "two", "three"]
+      categories: ["one", "two", "three"],
     });
   }
 
@@ -208,17 +208,8 @@ export default class Filter extends Component {
       priceMinFilter,
       priceMaxFilter,
       inStockFilter,
-      categoryFilter
+      categoryFilter,
     } = this.state;
-    console.log(
-      titleFilter,
-      charFilter,
-      originFilter,
-      priceMinFilter,
-      priceMaxFilter,
-      inStockFilter,
-      categoryFilter
-    );
     this.props.filterProducts(
       titleFilter,
       charFilter,
@@ -231,8 +222,15 @@ export default class Filter extends Component {
   };
 
   render() {
-    const { titleFilter, charFilter, originFilter, categoryFilter, characters, origins, categories } =
-      this.state;
+    const {
+      titleFilter,
+      charFilter,
+      originFilter,
+      categoryFilter,
+      characters,
+      origins,
+      categories,
+    } = this.state;
     return (
       <section>
         <div>

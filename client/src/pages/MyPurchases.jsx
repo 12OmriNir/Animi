@@ -12,8 +12,7 @@ export default class MyPurchases extends Component {
 const exampleList = [
     {
         id: "35-2384jktr-243",
-        productName: "Name1",
-        title: "Something1",
+        product_name: "Something1",
         description: "First description.",
         price: 59,
         inStock: true,
@@ -22,8 +21,7 @@ const exampleList = [
     },
     {
         id: "g5340987jg345890g",
-        productName: "Name2",
-        title: "Something2",
+        product_name: "Something2",
         description: "Second description.",
         price: 28,
         inStock: false,
