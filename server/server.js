@@ -32,22 +32,6 @@ app.delete("/api/product/:id", async (req, res) => {
 	deleteProduct(req, res)
 });
 
-app.get("/api/products/:category", async (req, res) => {
-	getProductsByCategory(req, res)
-})
-
-app.get("/api/products/:origin", async (req, res) => {
-	getProductsByOrigin(req, res)
-})
-
-app.get("/api/products/:charecter", async (req, res) => {
-	getProductsByCharecter(req, res)
-})
-
-app.get('/api/products/:minPrice/:maxPrice', async (req, res) => {
-	getProductsByPriceRange(req, res)
-})
-
 app.listen(PORT, function (err) {
 	if (err) {
 		console.log("Error in server setup");

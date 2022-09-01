@@ -46,50 +46,27 @@ async function deleteProduct(req, res) {
 }
 
 async function getProducts(req, res) {
-  let text = "SELECT * FROM animi.products";
+  const filters = {
+    category: req.body.category,
+    origin: req.body.origin,
+    character: req.body.character,
+    minPrice: req.body.minPrice,
+    maxPrice: req.body.maxPrice,
+  };
+
+  let text = "SELECT * FROM animi.products"
+
+  const params = [
+    filters.category,
+    filters.origin,
+    filters.character,
+    filters.minPrice,
+    filters.maxPrice
+  ]
+
   try {
-    const results = await query(text);
+    const results = await query(text, params);
     res.send(results.rows);
-  } catch (err) {
-    throw err;
-  }
-}
-
-async function getProductsByCategory(req, res) {
-  const text = `SELECT * FROM animi.products WHERE category = ${req.params.category}`
-  try{ 
-    const results = await query(text)
-    res.send(results.rows)
-  } catch (err) {
-    throw err;
-  }
-}
-
-async function getProductsByCharecter(req, res) {
-  const text = `SELECT * FROM animi.products WHERE charecter = ${req.params.charecter}`
-  try{ 
-    const results = await query(text)
-    res.send(results.rows)
-  } catch (err) {
-    throw err;
-  }
-}
-
-async function getProductsByOrigin(req, res) {
-  const text = `SELECT * FROM animi.products WHERE category = ${req.params.origin}`
-  try{ 
-    const results = await query(text)
-    res.send(results.rows)
-  } catch (err) {
-    throw err;
-  }
-}
-
-async function getProductsByPriceRange(req, res) {
-  const text = `SELECT * FROM animi.products WHERE price BETWEEN ${req.params.minPrice} AND ${req.params.maxPrice}` 
-  try{
-    const results = await query(text)
-    res.send(results.rows)
   } catch (err) {
     throw err;
   }
@@ -99,8 +76,4 @@ module.exports = {
   addProduct,
   deleteProduct,
   getProducts,
-  getProductsByCategory,
-  getProductsByCharecter,
-  getProductsByOrigin,
-  getProductsByPriceRange
 };
