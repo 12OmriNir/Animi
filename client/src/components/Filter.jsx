@@ -27,7 +27,7 @@ export default class Filter extends Component {
     this.setState({
       characters: ["one", "two", "three"],
       origins: ["one", "two", "three"],
-      categoties: ["one", "two", "three"]
+      categories: ["one", "two", "three"]
     });
   }
 
@@ -55,12 +55,13 @@ export default class Filter extends Component {
     return (
       <div className="list-group-item">
         <p>
-          <label htmlFor="amount">Price range:</label>
+          <label htmlFor="amount">(Price):</label>
           <p></p>
           <p></p>
           <input
             type="text"
             id="amount"
+            className="App"
             readOnly
             style={{ border: 0, color: "#000000" }}
           />
@@ -83,6 +84,7 @@ export default class Filter extends Component {
           name={name}
           onChange={this.onValueUpdate}
           value={value}
+          maxLength="20"
         />
       </div>
     );
