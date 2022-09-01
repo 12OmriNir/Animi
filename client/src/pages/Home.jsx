@@ -59,7 +59,7 @@ const products = [
     productName: "doll32",
     title: "Chibi Eren Yegar",
     description: "height: 14cm",
-    inStock: true,
+    inStock: false,
     imgUrl:
       "https://animeshop.co.il/wp-content/uploads/2022/07/5ede66f3-6c55-4e4b-a9c9-73c38fc27586.jpg",
     price: 30,
@@ -130,7 +130,7 @@ const products = [
     productName: "doll42",
     title: "Chibi Eren Yegar",
     description: "height: 14cm",
-    inStock: true,
+    inStock: false,
     imgUrl:
       "https://animeshop.co.il/wp-content/uploads/2022/07/5ede66f3-6c55-4e4b-a9c9-73c38fc27586.jpg",
     price: 30,
