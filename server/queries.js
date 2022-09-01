@@ -12,7 +12,7 @@ async function addProduct(req, res) {
     image_url: req.body.imageUrl,
   };
   try {
-    let string = `INSERT INTO animi.products (id,name,category,description,price,is_in_stock,image_url) VALUES
+    let string = `INSERT INTO animi.products (id,product_name,category,description,price,is_in_stock,image_url) VALUES
          ($1,$2,$3,$4,$5,$6,$7)`;
     const params = [
       newProduct.id,
