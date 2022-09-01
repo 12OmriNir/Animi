@@ -17,7 +17,7 @@ export default class Filter extends Component {
       inStockFilter: "Undecided",
       categoryFilter: "",
       characters: [],
-      franchises: [],
+      origins: [],
       categories: [],
     };
   }
@@ -26,7 +26,7 @@ export default class Filter extends Component {
     this.setSlider();
     this.setState({
       characters: ["one", "two", "three"],
-      franchises: ["one", "two", "three"],
+      origins: ["one", "two", "three"],
       categoties: ["one", "two", "three"]
     });
   }
@@ -202,16 +202,16 @@ export default class Filter extends Component {
     const {
       titleFilter,
       charFilter,
-      franchiseFilter,
+      originFilter,
       priceMinFilter,
       priceMaxFilter,
       inStockFilter,
-      categoryFilter,
+      categoryFilter
     } = this.state;
     console.log(
       titleFilter,
       charFilter,
-      franchiseFilter,
+      originFilter,
       priceMinFilter,
       priceMaxFilter,
       inStockFilter,
@@ -220,7 +220,7 @@ export default class Filter extends Component {
     this.props.filterProducts(
       titleFilter,
       charFilter,
-      franchiseFilter,
+      originFilter,
       priceMinFilter,
       priceMaxFilter,
       inStockFilter,
@@ -229,7 +229,7 @@ export default class Filter extends Component {
   };
 
   render() {
-    const { titleFilter, charFilter, franchiseFilter, categoryFilter, characters, franchises, categories } =
+    const { titleFilter, charFilter, originFilter, categoryFilter, characters, origins, categories } =
       this.state;
     return (
       <section>
@@ -250,32 +250,32 @@ export default class Filter extends Component {
               )}
               {this.newSelectFilter(
                 "charSearch",
-                "(Character):",
+                "(Characters):",
                 "charFilter",
-                "Unfiltered",
+                "All",
                 charFilter,
                 characters
               )}
               {this.newSelectFilter(
-                "franchiseSearch",
-                "(Franchise):",
-                "franchiseFilter",
-                "Unfiltered",
-                franchiseFilter,
-                franchises
+                "originSearch",
+                "(Origins):",
+                "originFilter",
+                "All",
+                originFilter,
+                origins
               )}
               {this.newSelectFilter(
                 "categorySearch",
-                "(Category):",
+                "(Categories):",
                 "categoryFilter",
-                "Unfiltered",
+                "All",
                 categoryFilter,
                 categories
               )}
               {this.newSilder()}
               {this.newRadioFilter(
                 "(In Stock):",
-                "<-Unfiltered",
+                "<-Any",
                 "<-No",
                 "<-Yes",
                 "inStockFilter"
