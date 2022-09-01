@@ -1,13 +1,13 @@
-const path = require('path');
 const express = require('express');
-const app = express();
 const cors = require('cors');
-const queries = require('./queries.js');
-const db = require('./db.js');
-const uuid = require('uuid');
+const { addProduct, deleteProduct, getProducts } = require('./queries')
+const app = express();
+app.use(express.json());
+app.use(cors());
+const PORT = 3000
 
 app.use(cors());
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
 	res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -15,31 +15,26 @@ app.use(function(req, res, next) {
 	next();
 });
 const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-db.connect(() => app.listen(80));
 
-app.get('/api', async (req, res) => {
-	let data = await queries.getTasks(req.query.search, req.query.filter);
-	res.send(data.rows);
+app.get("/api/products", async (req, res) => {
+	getProducts(req, res)
 });
 
-app.post('/api', async (req, res) => {
-	let task = req.body;
-	task.id = uuid.v4();
-	await queries.addTask(task);
-	res.send(task);
+app.post("/api/product", async (req, res) => {
+	addProduct(req, res)
 });
 
-app.delete('/api', async(req, res) => {
-	let data = await queries.deleteTask(req.query.id);
-	res.send({rowsAffected: data.rowCount});
+
+app.delete("/api/product/:id", async (req, res) => {
+	deleteProduct(req, res)
 });
 
-app.put('/api', async(req, res) => {
-	let data = await queries.updateTask(req.body);
-	res.send({rowsAffected: data.rowCount});
-})
-
-app.use(express.static(path.resolve(__dirname, '../client/build')));
+app.listen(PORT, function (err) {
+	if (err) {
+		console.log("Error in server setup");
+	}
+	console.log("Server listening on Port", PORT);
+});

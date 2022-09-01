@@ -1,29 +1,62 @@
-const db = require('./db.js');
+const { query } = require("./db");
+const shortid = require("shortid");
 
-function addTask(task) {
-    return db.query('INSERT INTO todolist.t_tasks VALUES($1, $2)', [task.id, task.title]);
+async function addProduct(req, res) {
+  const newProduct = {
+    id: shortid.generate(),
+    name: req.body.name,
+    category: req.body.category,
+    description: req.body.description,
+    price: req.body.price,
+    is_in_stock: req.body.isInStock,
+    image_url: req.body.imageUrl,
+  };
+  try {
+    let string = `INSERT INTO animi.products (id,name,category,description,price,is_in_stock,image_url) VALUES
+         ($1,$2,$3,$4,$5,$6,$7)`;
+    const params = [
+      newProduct.id,
+      newProduct.name,
+      newProduct.category,
+      newProduct.description,
+      newProduct.price,
+      newProduct.is_in_stock,
+      newProduct.image_url,
+    ];
+    let insertProduct = await query(string, params);
+    res.send(newProduct);
+  } catch (e) {
+    console.log("error", e);
+  }
 }
 
-function deleteTask(id) {
-    return db.query('DELETE FROM todolist.t_tasks WHERE id=$1', [id]);
+async function deleteProduct(req, res) {
+  const productID = req.params.id;
+
+  try {
+    let string = `DELETE FROM animi.products WHERE id = '${productID}'`;
+    let requestedParking = await query(string);
+
+    let rePrint = "SELECT * FROM animi.products";
+    let requestedRePrint = await query(rePrint);
+    res.send(requestedRePrint.rows);
+  } catch (e) {
+    console.log("error", e);
+  }
 }
 
-function getTasks(search, filter) {
-    if(!search) search = '';
-	search = '%' + search.toLowerCase() + '%';
-    if(filter == 'COMPLETED') {
-        return db.query('SELECT * FROM todolist.t_tasks WHERE completed=true AND LOWER(title) LIKE $1 ORDER BY id', [search]);
-    }
-    else if(filter == 'LEFT') {
-        return db.query('SELECT * FROM todolist.t_tasks WHERE completed=false AND LOWER(title) LIKE $1 ORDER BY id', [search]);
-    }
-    else {
-        return db.query('SELECT * FROM todolist.t_tasks WHERE LOWER(title) LIKE $1 ORDER BY id', [search]);
-    }
+async function getProducts(req, res) {
+  let text = "SELECT * FROM animi.products";
+  try {
+    const results = await query(text);
+    res.send(results.rows);
+  } catch (err) {
+    throw err;
+  }
 }
 
-function updateTask(task) {
-    return db.query('UPDATE todolist.t_tasks SET completed=$1 WHERE id=$2', [task.completed || false, task.id]);
-}
-
-module.exports = {addTask, getTasks, deleteTask, updateTask};
+module.exports = {
+  addProduct,
+  deleteProduct,
+  getProducts,
+};
