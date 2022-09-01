@@ -49,28 +49,48 @@ export default class Filter extends Component {
   }
 
   onFilterChange = () => {
-    let newList = this.props.list;
-    newList.filter((item) => {
-        const nameCheck = this.state.nameFilter ? this.state.nameFilter : item.name;
-        const titleCheck = this.state.titleFilter ? this.state.titleFilter : item.title;
-        const descCheck = this.state.descFilter ? this.state.descFilter : item.description;
-        const priceMinCheck = this.state.priceMinFilter ? this.state.priceMinFilter : item.price;
-        const priceMaxCheck = this.state.priceMaxFilter ? this.state.priceMaxFilter : item.price;
-        const inStockCheck = this.state.inStockFilter ? this.state.inStockFilter : item.inStock;
-        const categoryCheck = this.state.categoryFilter ? this.state.categoryFilter : item.category;
-        if ((item.name.toUpperCase().includes(String(nameCheck).toUpperCase()))
-         && (item.title.toUpperCase().includes(String(titleCheck).toUpperCase()))
-         && (item.description.toUpperCase().includes(String(descCheck).toUpperCase()))
-         && (item.price >= priceMinCheck)
-         && (item.price <= priceMaxCheck)
-         && (item.inStock === inStockCheck)
-         && (item.category.toUpperCase().includes(String(categoryCheck).toUpperCase()))
+    let newList = this.props.products;
+    newList.filter((product) => {
+        const nameCheck = this.state.nameFilter ? this.state.nameFilter : product.name;
+        const titleCheck = this.state.titleFilter ? this.state.titleFilter : product.title;
+        const descCheck = this.state.descFilter ? this.state.descFilter : product.description;
+        const priceMinCheck = this.state.priceMinFilter ? this.state.priceMinFilter : product.price;
+        const priceMaxCheck = this.state.priceMaxFilter ? this.state.priceMaxFilter : product.price;
+        const inStockCheck = this.state.inStockFilter ? this.state.inStockFilter : product.inStock;
+        const categoryCheck = this.state.categoryFilter ? this.state.categoryFilter : product.category;
+        if ((product.name.toUpperCase().includes(String(nameCheck).toUpperCase()))
+         && (product.title.toUpperCase().includes(String(titleCheck).toUpperCase()))
+         && (product.description.toUpperCase().includes(String(descCheck).toUpperCase()))
+         && (product.price >= priceMinCheck)
+         && (product.price <= priceMaxCheck)
+         && (product.inStock === inStockCheck)
+         && (product.category.toUpperCase().includes(String(categoryCheck).toUpperCase()))
         ) {
-            return item;
+            return product;
         }
     })
-    this.props.filterList(newList);
+    this.props.updateProducts(newList);
   }
+
+  /*
+
+  (For importing:)
+  ================
+  import Filter from '../components/Filter';
+
+  (Inside the col:)
+  =================
+  <Filter products={products} updateProducts={this.updateProducts}/>
+
+  (Inside the component:)
+  =========================
+  updateProducts = (filteredProducts) => {
+    this.setState({
+        products: filteredProducts
+    });
+  }
+
+  */
 
   onValueUpdate = (e) => {
     this.setState((state) => {
@@ -88,8 +108,8 @@ export default class Filter extends Component {
     } else {
         inStock = "Undecided";
     }
-    this.setState((state) => {
-      state["inStockFilter"] = inStock;
+    this.setState({
+      inStockFilter: inStock
     });
     this.onFilterChange();
   };
@@ -104,19 +124,19 @@ export default class Filter extends Component {
               <h5 class="card-title">Filters</h5>
             </div>
             <ul class="list-group list-group-flush">
-              {this.newTextFilter("nameSearch", "Name:", "nameFilter", nameFilter)}
-              {this.newTextFilter("titleSearch", "Title:", "titleFilter", titleFilter)}
-              {this.newTextFilter("descSearch", "Description:", "descFilter", descFilter)}
+              {this.newTextFilter("nameSearch", "(Name):", "nameFilter", nameFilter)}
+              {this.newTextFilter("titleSearch", "(Title):", "titleFilter", titleFilter)}
+              {this.newTextFilter("descSearch", "(Description):", "descFilter", descFilter)}
               <div class="row">
                 <div class="col">
-                    {this.newNumberFilter("priceMinSearch", "Price Min:", "priceMinFilter", priceMinFilter)}
+                    {this.newNumberFilter("priceMinSearch", "(Price:) Min:", "priceMinFilter", priceMinFilter)}
                 </div>
                 <div class="col">
-                    {this.newNumberFilter("priceMaxSearch", "Price Max:", "priceMaxFilter", priceMaxFilter)}
+                    {this.newNumberFilter("priceMaxSearch", "Max:", "priceMaxFilter", priceMaxFilter)}
                 </div>
               </div>
-              {this.newRadioFilter("In Stock:", "No:", "Yes:", "inStockFilter")}
-              {this.newTextFilter("categorySearch", "Category:", "categoryFilter", categoryFilter)}
+              {this.newRadioFilter("(In Stock):", "No:", "Yes:", "inStockFilter")}
+              {this.newTextFilter("categorySearch", "(Category):", "categoryFilter", categoryFilter)}
             </ul>
           </div>
         </div>
