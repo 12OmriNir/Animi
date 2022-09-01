@@ -1,103 +1,292 @@
+import $ from "jquery";
 import { Component } from "react";
+import "jquery-ui/dist/themes/base/jquery-ui.css";
+import "jquery/dist/jquery.js";
+import "jquery-ui/dist/jquery-ui.js";
 
 export default class Filter extends Component {
-  state = {
-    nameFilter: "",
-    titleFilter: "",
-    descFilter: "",
-    priceMinFilter: 0,
-    priceMaxFilter: 10000,
-    inStockFilter: "Undecided",
-    categoryFilter: "",
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      titleFilter: "",
+      charFilter: "",
+      franchiseFilter: "",
+      priceMinFilter: 0,
+      priceMaxFilter: 0,
+      inStockFilter: "Undecided",
+      categoryFilter: "",
+      characters: [],
+      franchises: [],
+      categories: [],
+    };
+  }
+
+  componentDidMount() {
+    this.setSlider();
+    this.setState({
+      characters: ["one", "two", "three"],
+      franchises: ["one", "two", "three"],
+      categoties: ["one", "two", "three"]
+    });
+  }
+
+  setSlider() {
+    $("#slider-range").slider({
+      range: true,
+      min: 0,
+      max: 1000,
+      values: [this.state.priceMinFilter, this.state.priceMaxFilter],
+      change: this.onSliderChange,
+      slide: function (event, ui) {
+        $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+      },
+    });
+    $("#amount").val(
+      "$" +
+        $("#slider-range").slider("values", 0) +
+        " - $" +
+        $("#slider-range").slider("values", 1)
+    );
+    $("#amount").add();
+  }
+
+  newSilder = () => {
+    return (
+      <div className="list-group-item">
+        <p>
+          <label htmlFor="amount">Price range:</label>
+          <p></p>
+          <p></p>
+          <input
+            type="text"
+            id="amount"
+            readOnly
+            style={{ border: 0, color: "#000000" }}
+          />
+        </p>
+        <div id="slider-range"></div>
+      </div>
+    );
   };
 
   newTextFilter = (id, label, name, value) => {
     return (
-        <div className="list-group-item">
-            <label htmlFor={id}>{label}</label>
-            <input id={id} type="text" className="form-control" name={name} onChange={this.onValueUpdate} value={value}/>
-        </div>
-    )
-  }
+      <div className="list-group-item">
+        <label htmlFor={id}>{label}</label>
+        <p></p>
+        <p></p>
+        <input
+          id={id}
+          type="text"
+          className="form-control"
+          name={name}
+          onChange={this.onValueUpdate}
+          value={value}
+        />
+      </div>
+    );
+  };
 
-  newNumberFilter = (id, label, name, value) => {
+  newSelectFilter = (id, label, name, initial, value, options) => {
     return (
-        <div className="list-group-item">
-            <label htmlFor={id}>{label}</label>
-            <input id={id} type="number" className="form-control" name={name} onChange={this.onValueUpdate} value={value}/>
-        </div>
-    )
-  }
+      <div className="list-group-item">
+        <label htmlFor={id}>{label}</label>
+        <p></p>
+        <p></p>
+        <select
+          id={id}
+          name={name}
+          className="form-select"
+          onChange={this.onValueUpdate}
+          value={value}
+        >
+          <option value="" selected>
+            {initial}
+          </option>
+          {this.spreadOptions(options)}
+        </select>
+      </div>
+    );
+  };
 
-  newRadioFilter = (label1, label2, label3, name) => {
+  newRadioFilter = (label1, label2, label3, label4, name) => {
     return (
-        <div>
-            <div className="form-check form-check-inline">
-                <input className="form-check-input" type="radio" name={name} id="inStock1" value="option1" onChange={this.onToggleUpdate} defaultChecked/>
-                <label className="form-check-label" htmlFor="inStock1">{label1}</label>
-            </div>
-            <div className="form-check form-check-inline">
-                <input className="form-check-input" type="radio" name={name} id="inStock2" value="option2" onChange={this.onToggleUpdate}/>
-                <label className="form-check-label" htmlFor="inStock2">{label2}</label>
-            </div>
-            <div className="form-check form-check-inline">
-                <input className="form-check-input" type="radio" name={name} id="inStock3" value="option3" onChange={this.onToggleUpdate}/>
-                <label className="form-check-label" htmlFor="inStock3">{label3}</label>
-            </div>
+      <div className="list-group-item">
+        <label htmlFor="StockRadio">{label1}</label>
+        <p></p>
+        <p></p>
+        <div id="StockRadio">
+          <div className="form-check form-check-inline">
+            <input
+              className="form-check-input"
+              type="radio"
+              name={name}
+              id="inStock1"
+              value="option1"
+              onChange={this.onToggleUpdate}
+              defaultChecked
+            />
+            <label className="form-check-label" htmlFor="inStock1">
+              {label2}
+            </label>
+          </div>
+          <div className="form-check form-check-inline">
+            <input
+              className="form-check-input"
+              type="radio"
+              name={name}
+              id="inStock2"
+              value="option2"
+              onChange={this.onToggleUpdate}
+            />
+            <label className="form-check-label" htmlFor="inStock2">
+              {label3}
+            </label>
+          </div>
+          <div className="form-check form-check-inline">
+            <input
+              className="form-check-input"
+              type="radio"
+              name={name}
+              id="inStock3"
+              value="option3"
+              onChange={this.onToggleUpdate}
+            />
+            <label className="form-check-label" htmlFor="inStock3">
+              {label4}
+            </label>
+          </div>
         </div>
-    )
-  }
+      </div>
+    );
+  };
 
-  onFilterChange = () => {
-    const { nameFilter, titleFilter, descFilter, priceMinFilter, priceMaxFilter, inStockFilter, categoryFilter} = this.state;
-    this.props.filterProducts(nameFilter, titleFilter, descFilter, priceMinFilter, priceMaxFilter, inStockFilter, categoryFilter);
-  }
+  spreadOptions = (options) => {
+    let newOptions = [];
+    options.forEach((option) => {
+      newOptions.push(<option value={option}>{option}</option>);
+    });
+    return [...newOptions];
+  };
 
   onValueUpdate = (e) => {
     this.setState((state) => {
       state[e.target.name] = e.target.value;
+      return state;
     });
-    this.onFilterChange();
+  };
+
+  onSliderChange = () => {
+    this.setState({
+      priceMinFilter: $("#slider-range").slider("values", 0),
+      priceMaxFilter: $("#slider-range").slider("values", 1),
+    });
   };
 
   onToggleUpdate = () => {
     let inStock;
     if (document.querySelector("#inStock2").checked) {
-        inStock = "No";
+      inStock = "No";
     } else if (document.querySelector("#inStock3").checked) {
-        inStock = "Yes";
+      inStock = "Yes";
     } else {
-        inStock = "Undecided";
+      inStock = "Undecided";
     }
     this.setState({
-      inStockFilter: inStock
+      inStockFilter: inStock,
     });
-    this.onFilterChange();
+  };
+
+  onFilterChange = () => {
+    const {
+      titleFilter,
+      charFilter,
+      franchiseFilter,
+      priceMinFilter,
+      priceMaxFilter,
+      inStockFilter,
+      categoryFilter,
+    } = this.state;
+    console.log(
+      titleFilter,
+      charFilter,
+      franchiseFilter,
+      priceMinFilter,
+      priceMaxFilter,
+      inStockFilter,
+      categoryFilter
+    );
+    this.props.filterProducts(
+      titleFilter,
+      charFilter,
+      franchiseFilter,
+      priceMinFilter,
+      priceMaxFilter,
+      inStockFilter,
+      categoryFilter
+    );
   };
 
   render() {
-    const { nameFilter, titleFilter, descFilter, priceMinFilter, priceMaxFilter, categoryFilter } = this.state;
+    const { titleFilter, charFilter, franchiseFilter, categoryFilter, characters, franchises, categories } =
+      this.state;
     return (
       <section>
         <div>
-          <div className="card">
+          <div
+            className="card"
+            style={{ position: "fixed", bottom: 180, width: 400 }}
+          >
             <div className="card-body">
-              <h5 className="card-title">Filters</h5>
+              <h1 className="card-title">Filters</h1>
             </div>
             <ul className="list-group list-group-flush">
-              {this.newTextFilter("nameSearch", "(Name):", "nameFilter", nameFilter)}
-              {this.newTextFilter("titleSearch", "(Title):", "titleFilter", titleFilter)}
-              {this.newTextFilter("descSearch", "(Description):", "descFilter", descFilter)}
-              <div className="row">
-                <div className="col">
-                    {this.newNumberFilter("priceMinSearch", "(Price:) Min:", "priceMinFilter", priceMinFilter)}
-                </div>
-                <div className="col">
-                    {this.newNumberFilter("priceMaxSearch", "Max:", "priceMaxFilter", priceMaxFilter)}
-                </div>
-              </div>
-              {this.newRadioFilter("(In Stock):", "No:", "Yes:", "inStockFilter")}
-              {this.newTextFilter("categorySearch", "(Category):", "categoryFilter", categoryFilter)}
+              {this.newTextFilter(
+                "titleSearch",
+                "(Product Name):",
+                "titleFilter",
+                titleFilter
+              )}
+              {this.newSelectFilter(
+                "charSearch",
+                "(Character):",
+                "charFilter",
+                "Unfiltered",
+                charFilter,
+                characters
+              )}
+              {this.newSelectFilter(
+                "franchiseSearch",
+                "(Franchise):",
+                "franchiseFilter",
+                "Unfiltered",
+                franchiseFilter,
+                franchises
+              )}
+              {this.newSelectFilter(
+                "categorySearch",
+                "(Category):",
+                "categoryFilter",
+                "Unfiltered",
+                categoryFilter,
+                categories
+              )}
+              {this.newSilder()}
+              {this.newRadioFilter(
+                "(In Stock):",
+                "<-Unfiltered",
+                "<-No",
+                "<-Yes",
+                "inStockFilter"
+              )}
+              <button
+                type="button"
+                className="btn btn-warning"
+                onClick={() => this.onFilterChange()}
+              >
+                Set Filter
+              </button>
             </ul>
           </div>
         </div>

@@ -13,7 +13,7 @@ const ProductPreview = ({ product }) => {
             />
           </Link>
           <Link className="text-decoration-none link-light" to="/product">
-            <h5>{product.title}</h5>
+            <h5>{product.product_name}</h5>
           </Link>
           <p className="text-secondary">Price: ${product.price}</p>
           <p className="text-danger">{product.inStock ? '' : 'Out of stock'}</p>
