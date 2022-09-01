@@ -33,15 +33,15 @@ export default class Filter extends Component {
     return (
         <div>
             <div className="form-check form-check-inline">
-                <input className="form-check-input" type="radio" name={name} id="inStock1" value="option1" onChange={this.on}/>
+                <input className="form-check-input" type="radio" name={name} id="inStock1" value="option1" onChange={this.onToggleUpdate}/>
                 <label className="form-check-label" for="inStock1">{label1}</label>
             </div>
             <div className="form-check form-check-inline">
-                <input className="form-check-input" type="radio" name={name} id="inStock2" value="option2"/>
+                <input className="form-check-input" type="radio" name={name} id="inStock2" value="option2" onChange={this.onToggleUpdate}/>
                 <label className="form-check-label" for="inStock2">{label2}</label>
             </div>
             <div className="form-check form-check-inline">
-                <input className="form-check-input" type="radio" name={name} id="inStock3" value="option3"/>
+                <input className="form-check-input" type="radio" name={name} id="inStock3" value="option3" onChange={this.onToggleUpdate}/>
                 <label className="form-check-label" for="inStock3">{label3}</label>
             </div>
         </div>
@@ -69,7 +69,7 @@ export default class Filter extends Component {
             return item;
         }
     })
-    this.props.getFilter(newList);
+    this.props.filterList(newList);
   }
 
   onValueUpdate = (e) => {
@@ -80,13 +80,13 @@ export default class Filter extends Component {
   };
 
   onToggleUpdate = () => {
-    let inStock = "Undecided";
-    if (document.querySelector("#inStock1").checked) {
-        inStock = "Undecided";
-    } else if (document.querySelector("#inStock2").checked) {
+    let inStock;
+    if (document.querySelector("#inStock2").checked) {
         inStock = "No";
     } else if (document.querySelector("#inStock3").checked) {
         inStock = "Yes";
+    } else {
+        inStock = "Undecided";
     }
     this.setState((state) => {
       state["inStockFilter"] = inStock;
@@ -115,7 +115,7 @@ export default class Filter extends Component {
                     {this.newNumberFilter("priceMaxSearch", "Price Max:", "priceMaxFilter", priceMaxFilter)}
                 </div>
               </div>
-              {this.newRadioFilter("inStockToggle", "In Stock:", "inStockFilter")}
+              {this.newRadioFilter("In Stock:", "No:", "Yes:", "inStockFilter")}
               {this.newTextFilter("categorySearch", "Category:", "categoryFilter", categoryFilter)}
             </ul>
           </div>
