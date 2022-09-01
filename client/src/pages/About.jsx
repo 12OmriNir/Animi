@@ -30,6 +30,7 @@ export default class About extends Component {
               src="https://extrachill.com/wp-content/uploads/2022/05/rick-astley-never-gonna-give-you-up.jpeg"
               class="img-fluid"
               alt="tomer"
+
             />
             <h3 className="mt-1">Tomer Menashe</h3>
             <h5 className="text-secondary">CEO</h5>
@@ -43,6 +44,7 @@ export default class About extends Component {
             />
             <h3 className="mt-1">Itamar Melamed</h3>
             <h5 className="text-secondary">CEO</h5>
+
           </div>
         </div>
       </div>
