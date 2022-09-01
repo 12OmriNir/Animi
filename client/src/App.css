@@ -28,6 +28,25 @@
   color: #61dafb;
 }
 
+.card-inline{
+  min-height: 320px;
+}
+.set-to-side{
+  margin-right: 350px;
+}
+
+@media (max-width:576px) {
+  .card-inline{
+    min-height:371px ;
+    }
+}
+
+@media (max-width:992px) {
+  .set-to-side{
+      margin-right: 0;
+  }
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

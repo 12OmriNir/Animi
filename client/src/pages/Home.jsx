@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import ProductsList from "../components/ProductsList";
 import Filter from '../components/Filter';
 
+import * as test from "../services/productList"
+
+
 export default class Home extends Component {
   constructor(props) {
     super(props);
@@ -11,11 +14,20 @@ export default class Home extends Component {
     };
   }
 
-  componentDidMount() {
-    this.setState({
-      products: products //Get from the server
-    });
-  }
+
+  loadTodosFromServer = async () => {
+    let products = await test.getProducts();
+    let newState = { ...this.state };
+    newState.products = products;
+    this.setState(newState);
+};
+
+componentDidMount = () => {
+  this.loadTodosFromServer();
+};
+
+
+
 
   filterProducts = (titleFilter, descFilter, priceMinFilter, priceMaxFilter, inStockFilter, categoryFilter) => {
       /*
@@ -52,224 +64,15 @@ export default class Home extends Component {
   render() {
     const { products } = this.state;
     return (
-      <div className="container-fluid row">
-        <div className="col-9 row">
+      <div className="container">
+        <aside className="set-to-side">
           <ProductsList products={products} />
         </div>
         <div className="col-3 row">
           <Filter filterProducts={this.filterProducts}/>
         </div>
+        </aside>
       </div>
     );
   }
 }
-
-const products = [
-  {
-    id: "1",
-    product_name: "Chibi Eren Yegar",
-    description: "height: 14cm",
-    inStock: true,
-    imgUrl:
-      "https://animeshop.co.il/wp-content/uploads/2022/07/5ede66f3-6c55-4e4b-a9c9-73c38fc27586.jpg",
-    price: 30,
-    category: "Figure",
-  },
-
-  {
-    id: "2",
-    product_name: "Chibi Eren Yegar",
-    description: "height: 14cm",
-    inStock: true,
-    imgUrl:
-      "https://animeshop.co.il/wp-content/uploads/2022/07/5ede66f3-6c55-4e4b-a9c9-73c38fc27586.jpg",
-    price: 30,
-    category: "Figure",
-  },
-
-  {
-    id: "3",
-    product_name: "Chibi Eren Yegar",
-    description: "height: 14cm",
-    inStock: false,
-    imgUrl:
-      "https://animeshop.co.il/wp-content/uploads/2022/07/5ede66f3-6c55-4e4b-a9c9-73c38fc27586.jpg",
-    price: 30,
-    category: "Figure",
-  },
-
-  {
-    id: "4",
-    product_name: "Chibi Eren Yegar",
-    description: "height: 14cm",
-    inStock: true,
-    imgUrl:
-      "https://animeshop.co.il/wp-content/uploads/2022/07/5ede66f3-6c55-4e4b-a9c9-73c38fc27586.jpg",
-    price: 30,
-    category: "Figure",
-  },
-
-  {
-    id: "5",
-    product_name: "Chibi Eren Yegar",
-    description: "height: 14cm",
-    inStock: true,
-    imgUrl:
-      "https://animeshop.co.il/wp-content/uploads/2022/07/5ede66f3-6c55-4e4b-a9c9-73c38fc27586.jpg",
-    price: 30,
-    category: "Figure",
-  },
-
-  {
-    id: "6",
-    product_name: "Chibi Eren Yegar",
-    description: "height: 14cm",
-    inStock: true,
-    imgUrl:
-      "https://animeshop.co.il/wp-content/uploads/2022/07/5ede66f3-6c55-4e4b-a9c9-73c38fc27586.jpg",
-    price: 30,
-    category: "Figure",
-  },
-
-  {
-    id: "7",
-    product_name: "Chibi Eren Yegar",
-    description: "height: 14cm",
-    inStock: true,
-    imgUrl:
-      "https://animeshop.co.il/wp-content/uploads/2022/07/5ede66f3-6c55-4e4b-a9c9-73c38fc27586.jpg",
-    price: 30,
-    category: "Figure",
-  },
-
-  {
-    id: "8",
-    product_name: "Chibi Eren Yegar",
-    description: "height: 14cm",
-    inStock: true,
-    imgUrl:
-      "https://animeshop.co.il/wp-content/uploads/2022/07/5ede66f3-6c55-4e4b-a9c9-73c38fc27586.jpg",
-    price: 30,
-    category: "Figure",
-  },
-  {
-    id: "9",
-    product_name: "Chibi Eren Yegar",
-    description: "height: 14cm",
-    inStock: false,
-    imgUrl:
-      "https://animeshop.co.il/wp-content/uploads/2022/07/5ede66f3-6c55-4e4b-a9c9-73c38fc27586.jpg",
-    price: 30,
-    category: "Figure",
-  },
-  {
-    id: "10",
-    product_name: "Chibi Eren Yegar",
-    description: "height: 14cm",
-    inStock: true,
-    imgUrl:
-      "https://animeshop.co.il/wp-content/uploads/2022/07/5ede66f3-6c55-4e4b-a9c9-73c38fc27586.jpg",
-    price: 30,
-    category: "Figure",
-  },
-  {
-    id: "11",
-    product_name: "Chibi Eren Yegar",
-    description: "height: 14cm",
-    inStock: true,
-    imgUrl:
-      "https://animeshop.co.il/wp-content/uploads/2022/07/5ede66f3-6c55-4e4b-a9c9-73c38fc27586.jpg",
-    price: 30,
-    category: "Figure",
-  },
-  {
-    id: "12",
-    product_name: "Chibi Eren Yegar",
-    description: "height: 14cm",
-    inStock: true,
-    imgUrl:
-      "https://animeshop.co.il/wp-content/uploads/2022/07/5ede66f3-6c55-4e4b-a9c9-73c38fc27586.jpg",
-    price: 30,
-    category: "Figure",
-  },
-  {
-    id: "13",
-    product_name: "Chibi Eren Yegar",
-    description: "height: 14cm",
-    inStock: true,
-    imgUrl:
-      "https://animeshop.co.il/wp-content/uploads/2022/07/5ede66f3-6c55-4e4b-a9c9-73c38fc27586.jpg",
-    price: 30,
-    category: "Figure",
-  },
-  {
-    id: "14",
-    product_name: "Chibi Eren Yegar",
-    description: "height: 14cm",
-    inStock: true,
-    imgUrl:
-      "https://animeshop.co.il/wp-content/uploads/2022/07/5ede66f3-6c55-4e4b-a9c9-73c38fc27586.jpg",
-    price: 30,
-    category: "Figure",
-  },
-  {
-    id: "15",
-    product_name: "Chibi Eren Yegar",
-    description: "height: 14cm",
-    inStock: true,
-    imgUrl:
-      "https://animeshop.co.il/wp-content/uploads/2022/07/5ede66f3-6c55-4e4b-a9c9-73c38fc27586.jpg",
-    price: 30,
-    category: "Figure",
-  },
-  {
-    id: "16",
-    product_name: "Chibi Eren Yegar",
-    description: "height: 14cm",
-    inStock: true,
-    imgUrl:
-      "https://animeshop.co.il/wp-content/uploads/2022/07/5ede66f3-6c55-4e4b-a9c9-73c38fc27586.jpg",
-    price: 30,
-    category: "Figure",
-  },
-  {
-    id: "17",
-    product_name: "Chibi Eren Yegar",
-    description: "height: 14cm",
-    inStock: true,
-    imgUrl:
-      "https://animeshop.co.il/wp-content/uploads/2022/07/5ede66f3-6c55-4e4b-a9c9-73c38fc27586.jpg",
-    price: 30,
-    category: "Figure",
-  },
-  {
-    id: "18",
-    product_name: "Chibi Eren Yegar",
-    description: "height: 14cm",
-    inStock: true,
-    imgUrl:
-      "https://animeshop.co.il/wp-content/uploads/2022/07/5ede66f3-6c55-4e4b-a9c9-73c38fc27586.jpg",
-    price: 30,
-    category: "Figure",
-  },
-  {
-    id: "19",
-    product_name: "Chibi Eren Yegar",
-    description: "height: 14cm",
-    inStock: true,
-    imgUrl:
-      "https://animeshop.co.il/wp-content/uploads/2022/07/5ede66f3-6c55-4e4b-a9c9-73c38fc27586.jpg",
-    price: 30,
-    category: "Figure",
-  },
-  {
-    id: "20",
-    product_name: "Chibi Eren Yegar",
-    description: "height: 14cm",
-    inStock: true,
-    imgUrl:
-      "https://animeshop.co.il/wp-content/uploads/2022/07/5ede66f3-6c55-4e4b-a9c9-73c38fc27586.jpg",
-    price: 30,
-    category: "Figure",
-  },
-];
