@@ -55,8 +55,52 @@ async function getProducts(req, res) {
   }
 }
 
+async function getProductsByCategory(req, res) {
+  const text = `SELECT * FROM animi.products WHERE category = ${req.params.category}`
+  try{ 
+    const results = await query(text)
+    res.send(results.rows)
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function getProductsByCharecter(req, res) {
+  const text = `SELECT * FROM animi.products WHERE charecter = ${req.params.charecter}`
+  try{ 
+    const results = await query(text)
+    res.send(results.rows)
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function getProductsByOrigin(req, res) {
+  const text = `SELECT * FROM animi.products WHERE category = ${req.params.origin}`
+  try{ 
+    const results = await query(text)
+    res.send(results.rows)
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function getProductsByPriceRange(req, res) {
+  const text = `SELECT * FROM animi.products WHERE price BETWEEN ${req.params.minPrice} AND ${req.params.maxPrice}` 
+  try{
+    const results = await query(text)
+    res.send(results.rows)
+  } catch (err) {
+    throw err;
+  }
+}
+
 module.exports = {
   addProduct,
   deleteProduct,
   getProducts,
+  getProductsByCategory,
+  getProductsByCharecter,
+  getProductsByOrigin,
+  getProductsByPriceRange
 };
