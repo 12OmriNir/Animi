@@ -23,14 +23,12 @@ export default class Home extends Component {
 
   loadTodosFromServer = async () => {
     let products = await test.getProducts(filters);
-    console.log(products)
     let newState = { ...this.state };
     newState.products = products;
     this.setState(newState);
   };
 
   componentDidMount = () => {
-    console.log("check");
     this.loadTodosFromServer();
   };
 
