@@ -39,7 +39,6 @@ async function deleteProduct(req, res) {
 
   try {
     let string = `DELETE FROM animi.products WHERE id = '${productID}'`;
-    let requestedParking = await query(string);
 
     let rePrint = "SELECT * FROM animi.products";
     let requestedRePrint = await query(rePrint);
@@ -51,11 +50,11 @@ async function deleteProduct(req, res) {
 
 async function getProducts(req, res) {
   const filters = {
-    category: req.body.category,
-    origin: req.body.origin,
-    character: req.body.character,
-    minPrice: req.body.minPrice,
-    maxPrice: req.body.maxPrice,
+    category: req.query.category,
+    origin: req.query.origin,
+    character: req.query.character,
+    minPrice: req.query.minPrice,
+    maxPrice: req.query.maxPrice,
   };
 
   let text = `SELECT * FROM animi.products WHERE price BETWEEN ${filters["minPrice"]} AND ${filters["maxPrice"]}`
@@ -80,8 +79,22 @@ async function getProducts(req, res) {
   }
 }
 
+async function getProductById(id) {
+
+  try{
+    const text = `SELECT * FROM animi.products WHERE id = $1`
+    const product =  await query(text,[id])
+    // .then((res)=>console.log(res.rows))
+    console.log(product.rows)
+   return product.rows
+  }catch(err) {
+    throw err;
+  }
+}
+
 module.exports = {
   addProduct,
   deleteProduct,
   getProducts,
+  getProductById
 };

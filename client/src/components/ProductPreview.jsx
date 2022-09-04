@@ -13,7 +13,7 @@ const ProductPreview = ({ product }) => {
               alt={`${product.product_name} `}
             />
           </Link>
-          <Link className="text-decoration-none link-dark" to="/product">
+          <Link className="text-decoration-none link-dark" to={`/product/${product.id}`}>
             <h6 className="text-wrap">{product.product_name}</h6>
           </Link>
           <p className="text-secondary">Price: ${product.price}</p>
