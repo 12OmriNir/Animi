@@ -12,11 +12,8 @@ const ProductPreview = ({ product }) => {
               src={product.image_url}
               className="img-fluid"
               alt={`${product.product_name} `}
-            />
-          
-
+            />        
             <h6 className="product-name">{product.product_name}</h6>
-
           <p className="text-secondary">Price: ${product.price}</p>
           {!product.is_in_stock && (
             <p className="text-danger">
