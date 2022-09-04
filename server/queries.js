@@ -58,18 +58,22 @@ async function getProducts(req, res) {
     maxPrice: req.body.maxPrice,
   };
 
-  let text = "SELECT * FROM animi.products"
+  let text = `SELECT * FROM animi.products WHERE price BETWEEN ${filters["minPrice"]} AND ${filters["maxPrice"]}`
 
-  const params = [
-    filters.category,
-    filters.origin,
-    filters.character,
-    filters.minPrice,
-    filters.maxPrice
-  ]
+  if(filters['category']) {
+    text += ` AND category = '${filters["category"]}'`
+  }
+
+  if(filters['origin']) {
+    text += ` AND origin = '${filters["origin"]}'`
+  }
+
+  if(filters['character']) {
+    text += ` AND character = '${filters["character"]}'`
+  }
 
   try {
-    const results = await query(text, params);
+    const results = await query(text);
     res.send(results.rows);
   } catch (err) {
     throw err;
