@@ -2,18 +2,24 @@
 // Header.jsx //
 // ========== //
 
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
-import Logo from '../Logo/Logo'
-import SearchBar from './SearchBar/SearchBar'
-import NavigationBar from './NavigationBar'
+import Logo from "../Logo/Logo";
+import SearchBar from "./SearchBar/SearchBar";
+import NavigationBar from "./NavigationBar";
 
 //import { getId } from '../../utils/idGenerator'
 
 export default class Header extends Component {
-    render() {
-        return (
-            <header key={ 'header' /*getId()*/ } id="header" className="header">
+  render() {
+    return (
+      <header>
+        <div className="container headerContainer">
+          <NavigationBar />
+        </div>
+      </header>
+      /*
+            <header key={ 'header' /*getId()/ } id="header" className="header">
                 <div className='header-container'>
                     <div className='header-top'>
                         <div className='row'>
@@ -27,6 +33,7 @@ export default class Header extends Component {
                     </div>
                 </div>
             </header>
-        )
-    }
+            */
+    );
+  }
 }
