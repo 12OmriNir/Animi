@@ -29,10 +29,12 @@
 }
 
 .card-inline {
-  min-height: 295px;
+  min-height: 270px;
+  margin-bottom: 15px;
+  margin-top: 15px;
 }
 
-.text-wrap {
+.product-name {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: initial;
@@ -43,37 +45,52 @@
   float: right;
 }
 
-.fix-into-corner {
-  float: left;
-  position: absolute;
+.default{
+  color: inherit;
+  text-decoration: none;
 }
 
-@media (max-width: 576px) {
-  .card-inline {
-    min-height: 371px;
+.default:hover{
+  color: lightslategray;
+
+}
+
+.filterContainer {
+  max-width: 100%;
+  margin-top: 15px;
+}
+@media screen and (min-width: 768px) {
+  .filterContainer {
+    min-width: 300px;
   }
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
+  .fix-into-corner {
+    float: none;
+    position: relative;
+  }
   .set-to-side {
-    margin-left: 0;
+    margin-left: 0px !important;
+    float: right;
+  }
+  .col-sm-3 {
+    width: 50% !important;
+  }
+
+  .product-name {
+    white-space: normal;
   }
 }
 
-.text-danger {
+.text-danger,
+.text-success {
   margin: 0px;
 }
 
-.stick{
+.stick {
   position: absolute;
   bottom: 0;
-}
-
-@media (max-width: 992px) and (min-width: 768px) {
-  .col-sm-3 {
-    flex: 0 0 auto;
-    width: 50% !important;
-}
 }
 
 @keyframes App-logo-spin {

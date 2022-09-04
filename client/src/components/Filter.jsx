@@ -232,7 +232,7 @@ export default class Filter extends Component {
       categories,
     } = this.state;
     return (
-      <section className="fix-into-corner">
+      <section className="filterContainer">
         <div>
           <div
             className="card"
