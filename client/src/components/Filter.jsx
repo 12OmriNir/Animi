@@ -3,6 +3,7 @@ import { Component } from "react";
 import "jquery-ui/dist/themes/base/jquery-ui.css";
 import "jquery/dist/jquery.js";
 import "jquery-ui/dist/jquery-ui.js";
+import * as test from "../services/productList";
 
 export default class Filter extends Component {
   constructor(props) {
@@ -20,10 +21,17 @@ export default class Filter extends Component {
     };
   }
 
-  componentDidMount() {
-    const charList = this.props.products.map((product) => {return product.character});
-    const originList = this.props.products.map((product) => {return product.origin});
-    const categoryList = this.props.products.map((product) => {return product.category});
+  async componentDidMount() {
+    let products = await test.getProducts({
+      category : '',
+      origin : '',
+      character : '',
+      minPrice : 0,
+      maxPrice : 1000
+    });
+    const charList = getList(products, "character");
+    const originList = getList(products, "origin");
+    const categoryList = getList(products, "category");
     this.setSlider();
     this.setState({
       characters: charList,
@@ -190,4 +198,14 @@ export default class Filter extends Component {
       </section>
     );
   }
+}
+
+const getList = (products, element) => {
+  let newList = [];
+  products.forEach((product) => {
+      if (!newList.includes(product[element])) {
+        newList.push(product[element])
+      }
+  });
+  return newList;
 }
