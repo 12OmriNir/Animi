@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ProductsList from "../components/ProductsList";
+import Filter from "../components/Filter";
 
 import * as test from "../services/productList"
 
@@ -28,37 +29,49 @@ componentDidMount = () => {
 
 
 
+  filterProducts = (titleFilter, descFilter, priceMinFilter, priceMaxFilter, inStockFilter, categoryFilter) => {
+      /*
+
+      (leaving this commented because it will be filtered differently)
+
+      let filteredProducts = this.state.products.filter((product) => {
+      let titleCheck = titleFilter ? titleFilter : product.product_name;
+      let descCheck = descFilter ? descFilter : product.description;
+      let priceMinCheck = priceMinFilter ? priceMinFilter : product.price;
+      let priceMaxCheck = priceMaxFilter ? priceMaxFilter : product.price;
+      let inStockCheck = inStockFilter ? inStockFilter : product.inStock;
+      let categoryCheck = categoryFilter ? categoryFilter : product.category;
+      console.log(titleCheck);
+      console.log(descCheck);
+      console.log(priceMinCheck);
+      console.log(priceMaxCheck);
+      console.log(inStockCheck);
+      console.log(categoryCheck);
+      return ((product.product_name.toUpperCase().includes(String(titleCheck).toUpperCase()))
+      && (product.description.toUpperCase().includes(String(descCheck).toUpperCase()))
+      && (product.price >= priceMinCheck)
+      && (product.price <= priceMaxCheck)
+      && (product.inStock === inStockCheck)
+      && (product.category.toUpperCase().includes(String(categoryCheck).toUpperCase()))
+      )
+    });
+    this.setState({
+      products: filteredProducts
+    });
+    */
+  }
+
   render() {
     const { products } = this.state;
     return (
       <div className="container">
         <aside className="set-to-side">
           <ProductsList products={products} />
-          </aside>
+        </aside>
+        <div className="col-3 row">
+          <Filter filterProducts={this.filterProducts}/>
+        </div>
       </div>
     );
   }
 }
-
-const products = [
-  {
-    id: "zIaS3cpjU",
-    name: "doll12",
-    category: "Figure Chibi Eren Yegar",
-    description: "height: 14cm",
-    price: 30,
-    is_in_stock: true,
-    image_url:
-      "https://animeshop.co.il/wp-content/uploads/2022/07/5ede66f3-6c55-4e4b-a9c9-73c38fc27586.jpg",
-  },
-  {
-    id: "zcpjU",
-    name: "doll12",
-    category: "Figure Chibi Eren Yegar",
-    description: "height: 14cm",
-    price: 30,
-    is_in_stock: true,
-    image_url:
-      "https://animeshop.co.il/wp-content/uploads/2022/07/5ede66f3-6c55-4e4b-a9c9-73c38fc27586.jpg",
-  },
-];
