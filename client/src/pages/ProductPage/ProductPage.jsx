@@ -4,7 +4,8 @@
 
 import React, { Component } from "react";
 import withRouter from "../../utils/withRouter";
-//import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { getProductById } from '../../services/productList'
 
 class ProductPage extends Component {
   constructor(props) {
@@ -15,7 +16,12 @@ class ProductPage extends Component {
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    const product = getProductById('0XEkxBv6P').then((res) => { 
+      alert('productID')
+      console.log(res)
+    })
+  }
 
   render() {
     const { products, params } = this.props;
@@ -42,6 +48,7 @@ class ProductPage extends Component {
                 <p>{description}</p>
               </div>
               <div className="col product-buttons">
+                <Link to={'/purcheses'} productId={id} product={product}>
                 <button
                   type="button"
                   class="btn btn-success"
@@ -49,8 +56,9 @@ class ProductPage extends Component {
                     alert("Clicked");
                   }}
                 >
-                  Buy Now
+                  Buy Now !
                 </button>
+                </Link>
               </div>
             </div>
           </div>
