@@ -28,23 +28,52 @@
   color: #61dafb;
 }
 
-.card-inline{
-  min-height: 320px;
-}
-.set-to-side{
-  margin-right: 350px;
+.card-inline {
+  min-height: 295px;
 }
 
-@media (max-width:576px) {
-  .card-inline{
-    min-height:371px ;
-    }
+.text-wrap {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: initial;
 }
 
-@media (max-width:992px) {
-  .set-to-side{
-      margin-right: 0;
+.set-to-side {
+  margin-left: 280px !important;
+  float: right;
+}
+
+.fix-into-corner {
+  float: left;
+  position: absolute;
+}
+
+@media (max-width: 576px) {
+  .card-inline {
+    min-height: 371px;
   }
+}
+
+@media (max-width: 768px) {
+  .set-to-side {
+    margin-left: 0;
+  }
+}
+
+.text-danger {
+  margin: 0px;
+}
+
+.stick{
+  position: absolute;
+  bottom: 0;
+}
+
+@media (max-width: 992px) and (min-width: 768px) {
+  .col-sm-3 {
+    flex: 0 0 auto;
+    width: 50% !important;
+}
 }
 
 @keyframes App-logo-spin {
