@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ProductsList from "../components/ProductsList";
-import Filter from '../components/Filter'
+import Filter from "../components/Filter";
+
 import * as test from "../services/productList"
 
 
@@ -33,7 +34,7 @@ componentDidMount = () => {
     return (
       <div className="container">
             <ProductsList products={products} />
-          <Filter />
+          <Filter filterProducts={this.filterProducts}/>
       </div>
     );
   }
