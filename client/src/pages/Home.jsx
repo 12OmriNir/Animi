@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import ProductsList from "../components/ProductsList";
 import Filter from "../components/Filter";
 
-import * as test from "../services/productList"
-
+import * as test from "../services/productList";
 
 let filters = {
   category : '',
@@ -22,30 +21,26 @@ export default class Home extends Component {
     };
   }
 
-
   loadTodosFromServer = async () => {
     let products = await test.getProducts(filters);
     console.log(products)
     let newState = { ...this.state };
     newState.products = products;
     this.setState(newState);
-};
+  };
 
-componentDidMount = () => {
-  this.loadTodosFromServer();
-};
-
-
-
+  componentDidMount = () => {
+    console.log("check");
+    this.loadTodosFromServer();
+  };
 
   render() {
     const { products } = this.state;
     return (
-      <div className="container">
-          <ProductsList products={products} />
-          <Filter filterProducts={this.filterProducts}/>
+      <div className="container d-lg-flex gap-lg-3">
+        <Filter filterProducts={this.filterProducts} />
+        <ProductsList products={products} />
       </div>
     );
   }
 }
-
