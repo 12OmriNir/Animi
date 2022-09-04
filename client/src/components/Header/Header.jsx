@@ -4,8 +4,8 @@
 
 import React, { Component } from "react";
 
-import Logo from "../Logo/Logo";
-import SearchBar from "./SearchBar/SearchBar";
+//import Logo from "../Logo/Logo";
+//import SearchBar from "./SearchBar/SearchBar";
 import NavigationBar from "./NavigationBar";
 
 //import { getId } from '../../utils/idGenerator'

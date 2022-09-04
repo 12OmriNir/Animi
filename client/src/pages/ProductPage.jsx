@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import withRouter from '../utils/withRouter';
-//import { Link } from 'react-router-dom'
-import Image from '../components/Image';
-import ProductNotFoundImage from '../components/ProductNotFoundImage'
+import React, { Component } from "react";
+import withRouter from "../utils/withRouter";
+import { Link } from "react-router-dom";
+import Image from "../components/Image";
+import ProductNotFoundImage from "../components/ProductNotFoundImage";
 
 class ProductPage extends Component {
   constructor(props) {
@@ -19,22 +19,26 @@ class ProductPage extends Component {
     // 3. Get the product from the database.
     // 4. Render the page with the appropritate parameters.
 
-    console.log('Product Page componentDidMount');
+    console.log("Product Page componentDidMount");
 
+    /*
     const product = {
       id: 1,
-      name: 'asdfadsf',
-      title: 'Title',
-      description: 'Description',
-      price: '₪49.99',
-      category: 'Doll',
+      name: "asdfadsf",
+      title: "Title",
+      description: "Description",
+      price: "₪49.99",
+      category: "Doll",
       inStock: true,
-      imageUrl: '',
+      imageUrl: "",
     };
+    */
 
-    let newState = [...this.state]
-    newState.product = product
-    this.setState(newState)
+    /*
+    let newState = [...this.state];
+    newState.product = product;
+    this.setState(newState);
+    */
   }
 
   render() {
@@ -50,9 +54,22 @@ class ProductPage extends Component {
     console.log(this.props);
     */
 
-    const product = this.state.product;
+    //const product = this.state.product;
 
-    console.log(this.state.product);
+    const product = {
+      id: 1,
+      name: "asdfadsf",
+      title: "Title",
+      description: "Description",
+      price: "₪49.99",
+      category: "Doll",
+      inStock: true,
+      imageUrl: "",
+    };
+
+    console.log(this.props.params.id)
+
+    //console.log(this.state.product);
 
     return (
       // !!! DO NOT DELETE !!!
@@ -86,23 +103,22 @@ class ProductPage extends Component {
       </div>
       */
 
-
-      <section className='py-5'>
-        <div className='container px-4 px-lg-5 my-5'>
-          <div className='row gx-4 gx-lg-5 align-items-center'>
-            <div className='col-md-6'>
-              <Image src={''} alt={''} className='card-img-top mb-5 mb-md-0' />
+      <div className="py-5">
+        <div className="container px-4 px-lg-5 my-5">
+          <div className="row gx-4 gx-lg-5 align-items-center">
+            <div className="col-md-6">
+              <Image src={""} alt={""} className="card-img-top mb-5 mb-md-0" />
               <ProductNotFoundImage />
             </div>
-            <div className='col-md-6'>
-              <h1 className='display-5 fw-bolder'>{product.title}</h1>
-              <div className='fs-5 mb-5'>
-                <span className='text-decoration-line-through'>
+            <div className="col-md-6">
+              <h1 className="display-5 fw-bolder">{product.title}</h1>
+              <div className="fs-5 mb-5">
+                <span className="text-decoration-line-through">
                   ₪{product.price * 1.15}
                 </span>
                 <span>₪{product.price}</span>
               </div>
-              <p className='lead'>
+              <p className="lead">
                 Description description description description description
                 description description description description description
                 description description description description description
@@ -110,31 +126,25 @@ class ProductPage extends Component {
                 description description description description description
                 description description description description description
               </p>
-              <div className='d-flex'>
+              <div className="d-flex">
                 <form>
-                <input
-                  className='form-control text-center me-3'
-                  id='inputQuantity'
-                  type='num'
-                  style='max-width: 3rem'
-                  onClick={ () => { alert('Clicked') } }
-                />
-                <button
-                  className='btn btn-outline-dark flex-shrink-0'
-                  type='button'
-                  onClick={ () => { alert('Add to cart was Clicked') } }
-                >
-                  <i className='bi-cart-fill me-1'></i>
-                  Add to cart
-                </button>
+                  <button
+                    className="btn btn-outline-dark flex-shrink-0"
+                    type="button"
+                    onClick={() => {
+                      alert("Add to cart was Clicked");
+                    }}
+                  >
+                    <i className="bi-cart-fill me-1"></i>
+                    Add to cart
+                  </button>
                 </form>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      
       /*
             <div className='card' style='width:400px'>
                 <div className='card-body'>
