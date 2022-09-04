@@ -28,23 +28,77 @@
   color: #61dafb;
 }
 
-.card-inline{
-  min-height: 320px;
-}
-.set-to-side{
-  margin-right: 350px;
-}
-
-@media (max-width:576px) {
-  .card-inline{
-    min-height:371px ;
-    }
+.card-inline {
+  min-height: 270px;
+  margin-bottom: 15px;
+  margin-top: 15px;
 }
 
-@media (max-width:992px) {
-  .set-to-side{
-      margin-right: 0;
+.product-name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: initial;
+}
+
+.set-to-side {
+  margin-left: 280px !important;
+  float: right;
+}
+
+.default{
+  color: inherit;
+  text-decoration: none;
+}
+
+.default:hover{
+  color: lightslategray;
+
+}
+
+.footer-fix{
+  margin-top: 23%;
+}
+
+.fancy{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.filterContainer {
+  max-width: 100%;
+  margin-top: 15px;
+}
+@media screen and (min-width: 768px) {
+  .filterContainer {
+    min-width: 300px;
   }
+}
+
+@media screen and (max-width: 768px) {
+  .fix-into-corner {
+    float: none;
+    position: relative;
+  }
+  .set-to-side {
+    margin-left: 0px !important;
+    float: right;
+  }
+  .col-sm-3 {
+    width: 50% !important;
+  }
+
+  .product-name {
+    white-space: normal;
+  }
+}
+
+.text-danger,
+.text-success {
+  margin: 0px;
+}
+
+.stick {
+  position: absolute;
+  bottom: 0;
 }
 
 @keyframes App-logo-spin {
