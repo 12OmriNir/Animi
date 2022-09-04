@@ -18,6 +18,23 @@ export default class MyPurchases extends Component {
         });
     }
 
+    removeProduct = (id) => {
+        this.setState({
+            lineItems: this.state.lineItems.filter((item) => item.productId !== id)
+        })
+    }
+
+    addProductQuantity = (id, num) => {
+        this.setState({
+            lineItems: this.state.lineItems.map((item) => {
+                if ((item.productId === id) &&! (((item.quantity === 1)) && (num < 0))) {
+                    item.quantity += num;
+                }
+                return item;
+            })
+        })
+    }
+
     render() {
         const { cartId, lineItems } = this.state;
         return (
@@ -63,16 +80,19 @@ export default class MyPurchases extends Component {
               <h1 className="card-title">Cart:</h1>
             
             <ul className="list-group list-group-flush">
-                <div className="d-flex" style={{justifyContent: "space-evenly"}}>
-                {lineItems.map((cartItem) => 
+                <div className="d-flex" style={{flexWrap: "wrap", gap: "30px"}}>
+                {lineItems.map((cartItem) =>
                     <div>
-                        <img alt="..." src={getById(cartItem.productId).imageUrl} style={{ width: "100px", height: "100px", objectFit: "cover" }}/>
+                        <div className="d-flex" style={{flexWrap: "nowrap"}}>
+                            <img alt="..." src={getById(cartItem.productId).image_url} style={{ width: "100px", height: "100px", objectFit: "cover" }}/>
+                            <button type="button" className="btn btn-danger" onClick={() => this.removeProduct(cartItem.productId)} style={{height: "30px", width: "30px"}}>x</button>
+                        </div>
                         <h4>{getById(cartItem.productId).product_name}</h4>
                         <h4 style={{color: "orange"}}>${getById(cartItem.productId).price}</h4>
-                        <div className="d-flex" style={{justifyContent: "center"}}>
-                            <button type="button" className="btn btn-danger" style={{height: "30px", width: "30px"}}>-</button>
+                        <div className="d-flex" style={{justifyContent: "center", gap: "10px"}}>
+                            <button type="button" className="btn btn-danger" onClick={() => this.addProductQuantity(cartItem.productId, -1)}  style={{height: "30px", width: "30px"}}>-</button>
                             <h4 style={{color: "grey"}}>x{cartItem.quantity}</h4>
-                            <button type="button" className="btn btn-success" style={{height: "30px", width: "30px"}}>+</button>
+                            <button type="button" className="btn btn-success" onClick={() => this.addProductQuantity(cartItem.productId, 1)} style={{height: "30px", width: "30px"}}>+</button>
                         </div>
                     </div>
                 )}
@@ -162,21 +182,21 @@ const exampleList = [
         product_name: "Something1",
         description: "First description.",
         price: 59,
-        isInStock: true,
+        is_in_stock: true,
         character: "ACharacter",
         origin: "An origin",
         category: "Toy",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Walter_White_S5B.png/220px-Walter_White_S5B.png"
+        image_url: "https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Walter_White_S5B.png/220px-Walter_White_S5B.png"
     },
     {
         id: "g5340987jg345890g",
         product_name: "Something2",
         description: "Second description.",
         price: 28,
-        isInStock: false,
+        is_in_stock: false,
         character: "ACharacter",
         origin: "An origin",
         category: "Toy",
-        imageUrl: "https://i.insider.com/5dade9bc045a3139e8686c33?width=700"
+        image_url: "https://i.insider.com/5dade9bc045a3139e8686c33?width=700"
     }
 ]

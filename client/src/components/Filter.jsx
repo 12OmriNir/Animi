@@ -9,13 +9,11 @@ export default class Filter extends Component {
     super(props);
 
     this.state = {
-      titleFilter: "",
       charFilter: "",
-      franchiseFilter: "",
-      priceMinFilter: 0,
-      priceMaxFilter: 0,
-      inStockFilter: "Any",
+      originFilter: "",
       categoryFilter: "",
+      priceMinFilter: 0,
+      priceMaxFilter: 1000,
       characters: [],
       origins: [],
       categories: [],
@@ -23,11 +21,14 @@ export default class Filter extends Component {
   }
 
   componentDidMount() {
+    const charList = this.props.products.map((product) => {return product.character});
+    const originList = this.props.products.map((product) => {return product.origin});
+    const categoryList = this.props.products.map((product) => {return product.category});
     this.setSlider();
     this.setState({
-      characters: ["one", "two", "three"],
-      origins: ["one", "two", "three"],
-      categories: ["one", "two", "three"],
+      characters: charList,
+      origins: originList,
+      categories: categoryList,
     });
   }
 
@@ -71,25 +72,6 @@ export default class Filter extends Component {
     );
   };
 
-  newTextFilter = (id, label, name, value) => {
-    return (
-      <div className="list-group-item">
-        <label htmlFor={id}>{label}</label>
-        <p></p>
-        <p></p>
-        <input
-          id={id}
-          type="text"
-          className="form-control"
-          name={name}
-          onChange={this.onValueUpdate}
-          value={value}
-          maxLength="20"
-        />
-      </div>
-    );
-  };
-
   newSelectFilter = (id, label, name, initial, value, options) => {
     return (
       <div className="list-group-item">
@@ -108,58 +90,6 @@ export default class Filter extends Component {
           </option>
           {this.spreadOptions(options)}
         </select>
-      </div>
-    );
-  };
-
-  newRadioFilter = (label1, label2, label3, label4, name) => {
-    return (
-      <div className="list-group-item">
-        <label htmlFor="StockRadio">{label1}</label>
-        <p></p>
-        <p></p>
-        <div id="StockRadio">
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name={name}
-              id="inStock1"
-              value="option1"
-              onChange={this.onToggleUpdate}
-              defaultChecked
-            />
-            <label className="form-check-label" htmlFor="inStock1">
-              {label2}
-            </label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name={name}
-              id="inStock2"
-              value="option2"
-              onChange={this.onToggleUpdate}
-            />
-            <label className="form-check-label" htmlFor="inStock2">
-              {label3}
-            </label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name={name}
-              id="inStock3"
-              value="option3"
-              onChange={this.onToggleUpdate}
-            />
-            <label className="form-check-label" htmlFor="inStock3">
-              {label4}
-            </label>
-          </div>
-        </div>
       </div>
     );
   };
@@ -186,44 +116,25 @@ export default class Filter extends Component {
     });
   };
 
-  onToggleUpdate = () => {
-    let inStock;
-    if (document.querySelector("#inStock2").checked) {
-      inStock = "No";
-    } else if (document.querySelector("#inStock3").checked) {
-      inStock = "Yes";
-    } else {
-      inStock = "Any";
-    }
-    this.setState({
-      inStockFilter: inStock,
-    });
-  };
-
   onFilterChange = () => {
     const {
-      titleFilter,
       charFilter,
       originFilter,
-      priceMinFilter,
-      priceMaxFilter,
-      inStockFilter,
       categoryFilter,
+      priceMinFilter,
+      priceMaxFilter
     } = this.state;
     this.props.filterProducts(
-      titleFilter,
       charFilter,
       originFilter,
+      categoryFilter,
       priceMinFilter,
-      priceMaxFilter,
-      inStockFilter,
-      categoryFilter
+      priceMaxFilter
     );
   };
 
   render() {
     const {
-      titleFilter,
       charFilter,
       originFilter,
       categoryFilter,
@@ -241,12 +152,6 @@ export default class Filter extends Component {
               <h1 className="card-title">Filters</h1>
             </div>
             <ul className="list-group list-group-flush">
-              {this.newTextFilter(
-                "titleSearch",
-                "(Product Name):",
-                "titleFilter",
-                titleFilter
-              )}
               {this.newSelectFilter(
                 "charSearch",
                 "(Characters):",
@@ -272,13 +177,6 @@ export default class Filter extends Component {
                 categories
               )}
               {this.newSilder()}
-              {this.newRadioFilter(
-                "(In Stock):",
-                "<-Any",
-                "<-No",
-                "<-Yes",
-                "inStockFilter"
-              )}
               <button
                 type="button"
                 className="btn btn-warning"

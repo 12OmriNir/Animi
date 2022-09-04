@@ -34,11 +34,20 @@ export default class Home extends Component {
     this.loadTodosFromServer();
   };
 
+  filterProducts = (charFilter, originFilter, categoryFilter, priceMinFilter, priceMaxFilter) => {
+    filters.character = charFilter;
+    filters.origin = originFilter;
+    filters.category = categoryFilter;
+    filters.minPrice = priceMinFilter;
+    filters.maxPrice = priceMaxFilter;
+    this.loadTodosFromServer();
+  }
+
   render() {
     const { products } = this.state;
     return (
       <div className="container d-lg-flex gap-lg-3">
-        <Filter filterProducts={this.filterProducts} />
+        <Filter products={products} filterProducts={this.filterProducts} />
         <ProductsList products={products} />
       </div>
     );
