@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import withRouter from '../utils/withRouter';
 //import { Link } from 'react-router-dom'
+import Image from '../components/Image';
+import ProductNotFoundImage from '../components/ProductNotFoundImage'
 
 class ProductPage extends Component {
   constructor(props) {
@@ -53,7 +55,8 @@ class ProductPage extends Component {
     console.log(this.state.product);
 
     return (
-      /* !!! DO NOT DELETE !!!
+      // !!! DO NOT DELETE !!!
+      /*
       <div className='productPage-container'>
         <div className='row'>
           <div className='col col-md-4 product-image'></div>
@@ -83,15 +86,13 @@ class ProductPage extends Component {
       </div>
       */
 
+
       <section className='py-5'>
         <div className='container px-4 px-lg-5 my-5'>
           <div className='row gx-4 gx-lg-5 align-items-center'>
             <div className='col-md-6'>
-              <img
-                className='card-img-top mb-5 mb-md-0'
-                src=''
-                alt='...'
-              />
+              <Image src={''} alt={''} className='card-img-top mb-5 mb-md-0' />
+              <ProductNotFoundImage />
             </div>
             <div className='col-md-6'>
               <h1 className='display-5 fw-bolder'>{product.title}</h1>
@@ -110,6 +111,7 @@ class ProductPage extends Component {
                 description description description description description
               </p>
               <div className='d-flex'>
+                <form>
                 <input
                   className='form-control text-center me-3'
                   id='inputQuantity'
@@ -125,12 +127,14 @@ class ProductPage extends Component {
                   <i className='bi-cart-fill me-1'></i>
                   Add to cart
                 </button>
+                </form>
               </div>
             </div>
           </div>
         </div>
       </section>
 
+      
       /*
             <div className='card' style='width:400px'>
                 <div className='card-body'>
