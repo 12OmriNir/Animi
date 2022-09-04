@@ -232,11 +232,10 @@ export default class Filter extends Component {
       categories,
     } = this.state;
     return (
-      <section>
+      <section className="filterContainer">
         <div>
           <div
             className="card"
-            style={{ position: "fixed", bottom: 180, width: 400 }}
           >
             <div className="card-body">
               <h1 className="card-title">Filters</h1>

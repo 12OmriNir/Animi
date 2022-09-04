@@ -3,22 +3,31 @@ import { Link } from "react-router-dom";
 
 const ProductPreview = ({ product }) => {
   return (
-    <div className="col-3 mb-1">
-      <div className="card border-0">
+    <div className="col-6 col-sm-3">
+      <Link to={`/product/${product.id}`} className="default">
+      <div className="card-inline card">
         <div className="card-body">
-          <Link to={`/product/${product.id}`}>
+          
             <img
-              src={product.imgUrl}
-              style={{ width: "75%", height: "75%", objectFit: "cover" }}
-            />
-          </Link>
-          <Link className="text-decoration-none link-light" to="/product">
-            <h5>{product.product_name}</h5>
-          </Link>
+              src={product.image_url}
+              className="img-fluid"
+              alt={`${product.product_name} `}
+            />        
+            <h6 className="product-name">{product.product_name}</h6>
           <p className="text-secondary">Price: ${product.price}</p>
-          <p className="text-danger">{product.inStock ? '' : 'Out of stock'}</p>
+          {!product.is_in_stock && (
+            <p className="text-danger">
+              {"Out of stock"}
+            </p>
+          )}
+            {product.is_in_stock && (
+            <p className="text-success">
+              {"in stock"}
+            </p>
+          )}
         </div>
       </div>
+      </Link>
     </div>
   );
 };
