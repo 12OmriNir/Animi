@@ -10,6 +10,7 @@ const pool = new Pool({
 
 async function query(text, values) {
   const Pool = pool;
+  console.log('pool', JSON.stringify(pool))
   try {
     const result = await Pool.query({ text, values });
     return result;
