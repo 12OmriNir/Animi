@@ -6,7 +6,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import NavigationBarImageLogo from "./NavigationBarImageLogo";
 
-import './NavigationBar.css'
 
 /**
  * The purpose of the 'NavigationBar' component is to navigate between different pages of the website.
