@@ -14,7 +14,7 @@ export default class Header extends Component {
   render() {
     return (
       <header>
-        <div className="container headerContainer">
+        <div className="headerContainer">
           <NavigationBar />
         </div>
       </header>

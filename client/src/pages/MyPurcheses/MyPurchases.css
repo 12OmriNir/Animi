@@ -1,0 +1,120 @@
+.fixed{
+    margin-top: 20px;
+}
+
+.bottom-btn {
+    position: relative;
+    display: grid;
+}
+
+.card-header,.card-header h6{
+    text-align: left;
+    font-size: xx-large;
+    display: inline-block;
+    padding: 0 !important;
+}
+
+.card-header h6{
+    margin-left: 15px;
+}
+
+.btn-clear {
+    width: min-content;
+    margin-right: 10px;
+}
+
+.float-right{
+    float: right;
+}
+
+.product-body{
+    display: inline-block;
+}
+
+.product-body p{
+    display: table;
+}
+
+.clean-link{
+    color: black;
+    text-decoration: none;
+    font-size: larger;
+}
+.quantity_text{
+    margin-right: 15px;
+}
+.amount{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.block-minicart .minicart-items .product-item .product-item-details {
+    overflow: hidden;
+    position: relative;
+    padding-top: 7px;
+    text-align: right;
+}
+.product-item-details {
+    flex-grow: 1;
+    margin-right: 20px;
+    margin-top: 7px;
+}
+
+.block-minicart .minicart-items .product-item .action.delete {
+    width: 25px;
+    height: 25px;
+    background-color: #f6a419;
+    margin-top: 10px;
+}
+
+.block-minicart .minicart-items .product-item .action.delete span {
+    display: none;
+}
+
+.remove_cart_item {
+    display: block;
+    float: right;
+    margin-top: 38px;
+    margin-right: 25px;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: red;
+}
+
+img.product-image-photo {
+    max-width: 95px;
+    max-height: 110px;
+}
+
+.grid{
+    display: grid;
+}
+
+.text-align-right{
+text-align: right;
+}
+
+.block-minicart .minicart-items .product-item .product-item-photo {
+    display: block;
+    float: right;
+    margin-left: 10px;
+    width: 96px;
+    padding-top: 7px;
+}
+.block-minicart .minicart-items .product-item .product-item-name {
+    margin-bottom: 9px;
+}
+.block-minicart .minicart-items .product-item .product-item-name {
+    margin-top: 0;
+}
+.block-minicart .minicart-items .product-item .product-item-name {
+    font-weight: 400;
+    display: block;
+    text-transform: capitalize;
+    font-size: 16px;
+    margin-top: 16px;
+    margin-bottom: 6px;
+}
+
+
+
