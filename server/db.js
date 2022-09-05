@@ -5,7 +5,7 @@ const pool = new Pool({
   user: "postgres",
   database: "postgres",
   password: "Aa123456",
-  port: 5432,
+  port: 5434,
 });
 
 async function query(text, values) {
