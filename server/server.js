@@ -28,7 +28,6 @@ app.get("/api/products", async (req, res) => {
 });
 
 app.get("/api/products/:id", async (req, res) => {
-  console.log("check");
   const obj = await getProductById(req.params.id);
   res.send(obj);
 });

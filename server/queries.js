@@ -57,37 +57,37 @@ async function getProducts(req, res) {
     maxPrice: req.query.maxPrice,
   };
 
-  let text = `SELECT * FROM animi.products WHERE price BETWEEN ${filters["minPrice"]} AND ${filters["maxPrice"]}`
+  let text = `SELECT * FROM animi.products WHERE price BETWEEN ${filters["minPrice"]} AND ${filters["maxPrice"]}`;
 
-  if(filters['category']) {
-    text += ` AND category = '${filters["category"]}'`
+  if (filters["category"]) {
+    text += ` AND category = '${filters["category"]}'`;
   }
 
-  if(filters['origin']) {
-    text += ` AND origin = '${filters["origin"]}'`
+  if (filters["origin"]) {
+    text += ` AND origin = '${filters["origin"]}'`;
   }
 
-  if(filters['character']) {
-    text += ` AND character = '${filters["character"]}'`
+  if (filters["character"]) {
+    text += ` AND character = '${filters["character"]}'`;
   }
 
   try {
     const results = await query(text);
-    res.send(results.rows);
+    if (results) {
+      res.send(results.rows);
+    } else res.status(404).send("Products not found");
   } catch (err) {
     throw err;
   }
 }
 
 async function getProductById(id) {
-
-  try{
-    const text = `SELECT * FROM animi.products WHERE id = $1`
-    const product =  await query(text,[id])
-    // .then((res)=>console.log(res.rows))
-    console.log(product.rows)
-   return product.rows
-  }catch(err) {
+  console.log("id", id);
+  try {
+    const text = `SELECT * FROM animi.products WHERE id = $1`;
+    const product = await query(text, [id]);
+    return product;
+  } catch (err) {
     throw err;
   }
 }
@@ -96,5 +96,5 @@ module.exports = {
   addProduct,
   deleteProduct,
   getProducts,
-  getProductById
+  getProductById,
 };
