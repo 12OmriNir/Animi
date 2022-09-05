@@ -177,7 +177,7 @@ export default class MyPurchases extends Component {
             </div>
           </div>
           <div className="bottom-btn move-to-center">
-            <button className="btn btn-success grid">
+            <button className="btn btn-danger grid">
               Continue to checkout
             </button>
           </div>
