@@ -45,20 +45,6 @@ class ProductPage extends Component {
   }
 
   render() {
-    /*
-    const { products, params } = this.props;
-    const { id, name, title, description, price, category, inStock, imageUrl } =
-      products[0];
-
-    console.log(
-      id + name + title + description + price + category + inStock + imageUrl
-    );
-
-    console.log(this.props);
-    */
-
-    //const product = this.state.product;
-
     const product = {
       id: 1,
       name: "asdfadsf",
@@ -71,14 +57,17 @@ class ProductPage extends Component {
     };
 
     console.log(this.props.params.id);
-    //console.log(this.state.product);
 
     return (
       <div className="py-5">
         <div className="container px-4 px-lg-5 my-5">
           <div className="row gx-4 gx-lg-5 align-items-center">
             <div className="col-md-6 border rounded">
-              <Image src={""} alt={""} className="card-img-top mb-5 mb-md-0" />
+              <Image
+                src={""}
+                alt={"Product Image"}
+                className="card-img-top mb-5 mb-md-0"
+              />
               <ProductNotFoundImage className="card-img-top mb-5 mb-md-0" />
             </div>
             <div className="col-md-6">
@@ -99,16 +88,18 @@ class ProductPage extends Component {
               </p>
               <div className="d-flex">
                 <form>
-                  <button
-                    className="btn btn-outline-dark flex-shrink-0"
-                    type="button"
-                    onClick={() => {
-                      alert("Add to cart was Clicked");
-                    }}
-                  >
-                    <i className="bi-cart-fill me-1"></i>
-                    Add to cart
-                  </button>
+                  <Link to={"/purchases"}>
+                    <button
+                      className="btn btn-outline-dark flex-shrink-0"
+                      type="button"
+                      onClick={() => {
+                        alert("Buy Now ! was Clicked");
+                      }}
+                    >
+                      <i className="bi-cart-fill me-1"></i>
+                      Buy Now !
+                    </button>
+                  </Link>
                 </form>
               </div>
             </div>
