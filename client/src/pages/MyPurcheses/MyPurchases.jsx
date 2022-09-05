@@ -89,23 +89,23 @@ export default class MyPurchases extends Component {
                       <div className="row">
                         <div className="row amount-wrapper col-xs-12 col-lg-12 col-md-12 col-sm-12">
                           <div className="cartItemAmount_wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-6">
-                            <div class="cartItemAmount_wrapper col-xs-12 col-lg-6 col-md-6 col-sm-6 col-sma-6">
-                              <span class="quantity_text">Quantity: </span>
-                              <a class="qntCartChange">
+                            <div className="cartItemAmount_wrapper col-xs-12 col-lg-6 col-md-6 col-sm-6 col-sma-6">
+                              <span className="quantity_text">Quantity: </span>
+                              <a className="qntCartChange">
                                 <FaMinus />
                               </a>
                               <span className="amount">1</span>
-                              <a class="qntCartChange">
+                              <a className="qntCartChange">
                                 <FaPlus />
                               </a>
                             </div>
                           </div>
                           <div className="price-wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-12  text-align-left ">
-                            <span className="">Price of a single unit: </span>
+                            <span>Price of a single unit: </span>
                             <span className="price">45.00 ₪</span>
                           </div>
                           <div className="price-wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-12  text-align-left ">
-                            <span className="">Overall price: </span>
+                            <span>Overall price: </span>
                             <span className="price">45.00 ₪</span>
                           </div>
                         </div>
@@ -158,11 +158,11 @@ export default class MyPurchases extends Component {
                             </div>
                           </div>
                           <div className="price-wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-12  text-align-left ">
-                            <span className="">Price of a single unit: </span>
+                            <span>Price of a single unit: </span>
                             <span className="price">45.00 ₪</span>
                           </div>
                           <div className="price-wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-12  text-align-left ">
-                            <span className="">Overall price: </span>
+                            <span>Overall price: </span>
                             <span className="price">45.00 ₪</span>
                           </div>
                         </div>
