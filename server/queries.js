@@ -60,12 +60,11 @@ async function getProductById(id) {
     const text = `SELECT * FROM animi.products WHERE id = $1`;
     const product = await query(text, [id]);
     // .then((res)=>console.log(res.rows))
-    if (product.rowCount > 0){
-    return product.rows[0];
-  }else{
-    return null;
-  }
-
+    if (product.rowCount > 0) {
+      return product.rows[0];
+    } else {
+      return null;
+    }
   } catch (err) {
     throw err;
   }

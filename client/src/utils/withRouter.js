@@ -7,10 +7,3 @@ const withRouter = (Component) => (props) => {
 };
 
 export default withRouter;
-
-// function withRouter(Component) {
-//   const params = useParams();
-//   return function (props) {
-//     return <Component {...props} params={params} />;
-//   };
-// }
