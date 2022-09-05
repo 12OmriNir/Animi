@@ -64,7 +64,7 @@ class ProductPage extends Component {
       name: "asdfadsf",
       title: "Title",
       description: "Description",
-      price: "₪49.99",
+      price: "49.99", // ₪
       category: "Doll",
       inStock: true,
       imageUrl: "",
