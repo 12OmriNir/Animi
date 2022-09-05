@@ -10,21 +10,16 @@ class ProductPage extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      product: {},
-    };
+
   }
 
   componentDidMount() {}
 
   render() {
-    const { products, params } = this.props;
-    const { id, name, title, description, price, category, inStock, imageUrl } =
-      products[0];
+    const { product} = this.props;
 
-    console.log(
-      id + name + title + description + price + category + inStock + imageUrl
-    );
+
+    console.log(product.id + product.name );
 
     console.log(this.props);
 

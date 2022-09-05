@@ -13,6 +13,10 @@
   }
 }
 
+.fixed-fidback{
+  width: 100%;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -56,7 +60,10 @@
 }
 
 .footer-fix{
-  margin-top: 23%;
+  position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 .fancy{

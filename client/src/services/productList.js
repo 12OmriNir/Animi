@@ -28,5 +28,5 @@ export async function getProductById(id) {
 		method: 'GET',
 		headers : {'Content-Type': 'application/json'}
 	})
-	return await res.json
+	return await res.json();
 }
