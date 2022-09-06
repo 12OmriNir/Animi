@@ -38,10 +38,14 @@
   }
 }
 
-
 .footer-fix{
-  position: fixed;
+  position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
+}
+
+body {
+  position: relative;
+  padding-bottom: 10%;
 }
