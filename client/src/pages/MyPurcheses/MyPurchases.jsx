@@ -90,7 +90,7 @@ export default class MyPurchases extends Component {
                         <div className="row amount-wrapper col-xs-12 col-lg-12 col-md-12 col-sm-12">
                           <div className="cartItemAmount_wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-6">
                             <div className="cartItemAmount_wrapper col-xs-12 col-lg-6 col-md-6 col-sm-6 col-sma-6">
-                              <span className="quantity_text">Quantity: </span>
+                              <span className="quantity_text"><strong>Quantity: </strong></span>
                               <a className="qntCartChange">
                                 <FaMinus />
                               </a>
@@ -101,12 +101,12 @@ export default class MyPurchases extends Component {
                             </div>
                           </div>
                           <div className="price-wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-12">
-                            <span>Price of a single unit: </span>
-                            <span className="price">45.00 ₪</span>
+                            <span><strong>Price of a single unit: </strong></span>
+                            <span className="price"><strong>45.00$</strong></span>
                           </div>
                           <div className="price-wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-12">
-                            <span>Overall price: </span>
-                            <span className="price">45.00 ₪</span>
+                            <span><strong>Overall price: </strong></span>
+                            <span className="price"><strong>45.00$</strong></span>
                           </div>
                         </div>
                       </div>
@@ -143,10 +143,10 @@ export default class MyPurchases extends Component {
                     <br />
                     <div className="product-amount-and-price">
                       <div className="row">
-                        <div className="row amount-wrapper col-xs-12 col-lg-12 col-md-12 col-sm-12">
+                      <div className="row amount-wrapper col-xs-12 col-lg-12 col-md-12 col-sm-12">
                           <div className="cartItemAmount_wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-6">
-                            <div className="text-align-left">
-                              <span className="quantity_text">Quantity: </span>
+                            <div className="cartItemAmount_wrapper col-xs-12 col-lg-6 col-md-6 col-sm-6 col-sma-6">
+                              <span className="quantity_text"><strong>Quantity: </strong></span>
                               <a className="qntCartChange">
                                 <FaMinus />
                               </a>
@@ -157,12 +157,12 @@ export default class MyPurchases extends Component {
                             </div>
                           </div>
                           <div className="price-wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-12">
-                            <span>Price of a single unit: </span>
-                            <span className="price">45.00 ₪</span>
+                            <span><strong>Price of a single unit: </strong></span>
+                            <span className="price"><strong>45.00$</strong></span>
                           </div>
                           <div className="price-wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-12">
-                            <span>Overall price: </span>
-                            <span className="price">45.00 ₪</span>
+                            <span><strong>Overall price: </strong></span>
+                            <span className="price"><strong>45.00$</strong></span>
                           </div>
                         </div>
                       </div>
