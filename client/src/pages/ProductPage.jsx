@@ -162,7 +162,7 @@ class ProductPage extends Component {
   addToCart(product)
   { 
       cartManagement.addProductToCart(product.id);
-  }            
+  }
 }
 
 export default withRouter(ProductPage);
