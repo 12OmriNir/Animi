@@ -1,6 +1,6 @@
 .App {
   direction: ltr;
-    text-align: left;
+    text-align: center;
 }
 
 .App-logo {
@@ -38,10 +38,32 @@
   }
 }
 
+a{
+  text-decoration: none !important;
+}
+
+.product-name{
+  color: black;
+}
+
+.main-fix{
+  margin-top: 20px;
+}
 
 .footer-fix{
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+.filter-container{
+width:300px;
+min-width:300px;
+}
+
+@media screen and (max-width: 992px){
+  .filter-container{
+    width:100%;
+    }
 }
