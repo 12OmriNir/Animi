@@ -44,7 +44,7 @@ export default class MyPurchases extends Component {
         <div className="text-center fixed" id="cart_header">
           <div>
             <div className="col col-lg-12 col-xl-12 col-sm-12 col-xs-12">
-              <h1>עגלת הקניות שלכם</h1>
+              <h1>Your shopping cart</h1>
             </div>
           </div>
         </div>
@@ -52,7 +52,7 @@ export default class MyPurchases extends Component {
           <div className="card">
             <div className="card-header">
               <h6 className="title-products">
-                you have {} items in your shopping cart
+                You have {} items in your shopping cart
               </h6>
               <div className="float-right extra-padding">
                 <button className="btn btn-danger btn-clear">clear</button>
