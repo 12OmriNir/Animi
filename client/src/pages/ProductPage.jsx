@@ -19,11 +19,11 @@ class ProductPage extends Component {
     // 1. Get the id from the URL.
     // 2. Check if the product with that id exist.
     // 3. Get the product from the database.
-    // 4. Render the page with the appropritate parameters.
+    // 4. Render the page with the appropriate parameters.
 
     getProductById(this.props.params.id).then((product) => {
       this.setState({ product });
-    }); //'0XEkxBv6P'
+    });
   }
 
   render() {
