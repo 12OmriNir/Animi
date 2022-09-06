@@ -22,10 +22,10 @@ const Home = ({products, loadProducts}) =>  {
   }
 
   return (
-    <div className="container d-lg-flex gap-lg-3">
+    <div className="container d-lg-flex gap-lg-3 gap-lg-3 main-fix">
       <Filter products={products} filterProducts={filterProducts} />
       <ProductsList products={products} />
     </div>
   );
-
+  }
 export default Home
