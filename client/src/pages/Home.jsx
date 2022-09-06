@@ -27,6 +27,5 @@ const Home = ({products, loadProducts}) =>  {
       <ProductsList products={products} />
     </div>
   );
-}
 
 export default Home

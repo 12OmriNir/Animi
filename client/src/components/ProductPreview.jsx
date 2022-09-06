@@ -10,8 +10,8 @@ const ProductPreview = ({ product }) => {
           
             <img
               src={product.image_url}
-              style={{maxHeight: 200, maxWidth: 200}}
-              className="mw-auto rounded mb-3"
+              style={{maxHeight: 200}}
+              className="img-fluid"
               alt={`${product.product_name} `}
             />        
             <h6 className="product-name">{product.product_name}</h6>
