@@ -44,7 +44,7 @@ export default class Home extends Component {
   render() {
     const { products } = this.state;
     return (
-      <div className="container d-lg-flex gap-lg-3">
+      <div className="container d-lg-flex gap-lg-3 main-fix">
         <Filter products={products} filterProducts={this.filterProducts} />
         <ProductsList products={products} />
       </div>

@@ -151,7 +151,7 @@ export default class Filter extends Component {
       categories,
     } = this.state;
     return (
-      <section className="filterContainer">
+      <section className="filter-container">
         <div>
           <div
             className="card"

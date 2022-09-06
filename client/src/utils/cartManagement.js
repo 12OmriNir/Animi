@@ -128,7 +128,7 @@ export function addQuantityToExistProduct(productId, newQuantity)
             currCartItem.quantity = sum;
             updateLocalStorage();
         }
-        else if (sum == 0)
+        else if (sum === 0)
         {
             throw new Error('Quantity cannot be zero.')
         }
@@ -165,6 +165,7 @@ export function loadFromLocalStorage() {
   const parsedValue = value !== "undefined" ? JSON.parse(value) : null;
 
   cartItems = parsedValue;
+  return JSON.parse(localStorage.getItem(key));
 }
 
 // Clear Cart Items From LocalStorage
