@@ -14,8 +14,16 @@
     padding: 0 !important;
 }
 
+.price-wrapper{
+    align-self: center;
+}
+
 .card-header h6{
     margin-left: 15px;
+}
+
+h5 {
+    margin-bottom: 0 !important;
 }
 
 .btn-clear {
@@ -37,6 +45,10 @@ margin-left: 60px;
 
 .row-line{
     display: flex;
+}
+
+.quantity-mover {
+    margin-left: 15px;
 }
 
 .payment{
