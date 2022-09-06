@@ -11,6 +11,7 @@ import { getProducts } from "./services/productList";
 
 
 const initialFilters = {
+  name: '',
   category : '',
   origin : '',
   character : '',
@@ -19,7 +20,6 @@ const initialFilters = {
 }
 
 export default class App extends Component {
-  
   constructor(props) {
     super(props)
 
@@ -33,7 +33,9 @@ export default class App extends Component {
   }
 
   loadProducts = async(filters) => {
+    console.log(filters)
     let products = await getProducts(filters);
+    console.log(products)
     let newState = { ...this.state };
     newState.products = products;
     this.setState(newState);
@@ -41,7 +43,7 @@ export default class App extends Component {
   render () {
     return (
       <div className="App">
-        <Header />
+        <Header loadProducts = {this.loadProducts}/>
         <Routes>
           <Route path="/" element={<Home products={this.state.products} loadProducts = {this.loadProducts}/>} />
           <Route path="/product/:id" element={<ProductPage />} />

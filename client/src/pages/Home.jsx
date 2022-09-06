@@ -3,6 +3,7 @@ import ProductsList from "../components/ProductsList";
 import Filter from "../components/Filter";
 
 const filters = {
+  name : '',
   category : '',
   origin : '',
   character : '',
