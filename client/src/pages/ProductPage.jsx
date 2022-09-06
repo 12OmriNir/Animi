@@ -27,11 +27,6 @@ class ProductPage extends Component {
   }
 
   render() {
-    console.log("puki bnaya");
-    console.log(this.state.product);
-    //console.log(this.props.params.id)
-
-    //const product = this.state.product;
 
     const product =
     {
@@ -44,23 +39,6 @@ class ProductPage extends Component {
       inStock:     this.state.product.is_in_stock,
       imageUrl:    this.state.product.image_url,
     };
-
-    console.log(product)
-
-    /*
-    const product = {
-      product_name: "somthin something somthing",
-      id: "0XEkxBv6P",
-      category: "category 1",
-      description: "description 1",
-      price: 44,
-      is_in_stock: false,
-      image_url:
-        "https://animeshop.co.il/wp-content/uploads/2022/07/20220731_100624-500x500.jpg",
-      origin: "origin 1",
-      character: "character 1",
-    };
-    */
 
     // Product InStock //
     let productInStock;
