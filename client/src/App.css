@@ -1,6 +1,6 @@
 .App {
   direction: ltr;
-    text-align: left;
+    text-align: center;
 }
 
 .App-logo {
@@ -38,10 +38,43 @@
   }
 }
 
+a{
+  text-decoration: none !important;
+}
+
+.remove_cart_item:hover{
+  color:lightcoral;
+}
+
+
+.product-name{
+  color: black;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.clean-link:hover{
+  color: rgb(69, 68, 68);
+}
+
+.main-fix{
+  margin-top: 20px;
+}
 
 .footer-fix{
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
-  right: 0;
+  width: 100%;
+}
+
+.filter-container{
+width:300px;
+min-width:300px;
+}
+
+@media screen and (max-width: 992px){
+  .filter-container{
+    width:100%;
+    }
 }

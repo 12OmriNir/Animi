@@ -27,8 +27,26 @@
     float: right;
 }
 
-.product-body{
+.text-align-left{
+    text-align: left;
+}
+
+.text-align-left h4{
+margin-left: 60px;
+}
+
+.row-line{
+    display: flex;
+}
+
+.payment{
+    border: 1px solid lightgray;
+    background-color: var(--bs-card-cap-bg);
+}
+
+.product-body {
     display: inline-block;
+    border: 1px solid lightgray;
 }
 
 .product-body p{
@@ -73,9 +91,9 @@
 
 .remove_cart_item {
     display: block;
-    float: right;
-    margin-top: 38px;
-    margin-right: 25px;
+    margin-left: auto;
+    margin-right: 40px;
+    align-self: center;
     background-repeat: no-repeat;
     background-position: center;
     color: red;
@@ -90,12 +108,26 @@ img.product-image-photo {
     display: grid;
 }
 
+ol{
+    margin-bottom: 0.5rem;
+}
+
 .text-align-right{
 text-align: right;
 }
 
+.move-down {
+    align-self: center;
+}
+
+.product-item-photo {
+    margin-top: 15px;
+    display: flex;
+}
+
 .block-minicart .minicart-items .product-item .product-item-photo {
-    display: block;
+    display: flex;
+    align-items: center;
     float: right;
     margin-left: 10px;
     width: 96px;
