@@ -41,11 +41,6 @@ export default class NavigationBar extends Component {
                     About
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <Link to={`/product/${1}`} className="nav-link">
-                    ProductPage
-                  </Link>
-                </li>
               </ul>
               <form className="d-flex">
                 <input
