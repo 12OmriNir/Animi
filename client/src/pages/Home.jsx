@@ -1,10 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import ProductsList from "../components/ProductsList";
 import Filter from "../components/Filter";
 
-import * as test from "../services/productList";
-
-let filters = {
+const filters = {
   category : '',
   origin : '',
   character : '',
@@ -12,42 +10,23 @@ let filters = {
   maxPrice : 1000
 }
 
-export default class Home extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      products: [],
-    };
-  }
-
-  loadTodosFromServer = async () => {
-    let products = await test.getProducts(filters);
-    let newState = { ...this.state };
-    newState.products = products;
-    this.setState(newState);
-  };
-
-  componentDidMount = () => {
-    this.loadTodosFromServer();
-  };
-
-  filterProducts = (charFilter, originFilter, categoryFilter, priceMinFilter, priceMaxFilter) => {
+const Home = ({products, loadProducts}) =>  {
+  
+  const filterProducts = (charFilter, originFilter, categoryFilter, priceMinFilter, priceMaxFilter) => {
     filters.character = charFilter;
     filters.origin = originFilter;
     filters.category = categoryFilter;
     filters.minPrice = priceMinFilter;
     filters.maxPrice = priceMaxFilter;
-    this.loadTodosFromServer();
+    loadProducts(filters)
   }
 
-  render() {
-    const { products } = this.state;
-    return (
-      <div className="container d-lg-flex gap-lg-3">
-        <Filter products={products} filterProducts={this.filterProducts} />
-        <ProductsList products={products} />
-      </div>
-    );
-  }
+  return (
+    <div className="container d-lg-flex gap-lg-3">
+      <Filter products={products} filterProducts={filterProducts} />
+      <ProductsList products={products} />
+    </div>
+  );
 }
+
+export default Home
