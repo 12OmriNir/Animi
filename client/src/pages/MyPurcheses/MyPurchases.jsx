@@ -112,7 +112,6 @@ export default class MyPurchases extends Component {
                           />
                         </a>
                       </div>
-
                       <div className="product-item-details">
                         <div className="product-item-actions"></div>
                         <strong className="product-item-name"></strong>
