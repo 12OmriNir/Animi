@@ -11,7 +11,7 @@ export default class About extends Component {
           <div className="col-6 mb-3">
             <img
               src={OmriNir}
-              style={{Height: '370px'}}
+              style={{height: 370}}
               className="img-fluid"
               alt="omri"
             />
@@ -22,7 +22,7 @@ export default class About extends Component {
           <div className="col-6 mb-3">
             <img
               src={YoavNahmani}
-              style={{Height: '370px'}}
+              style={{height: 370}}
               className="img-fluid"
               alt="yoav"
             />
@@ -33,7 +33,7 @@ export default class About extends Component {
           <div className="col-6 mb-3">
             <img
               src="https://extrachill.com/wp-content/uploads/2022/05/rick-astley-never-gonna-give-you-up.jpeg"
-              style={{Height: '370px'}}
+              style={{height: 370}}
               className="img-fluid"
               alt="tomer"
 
@@ -45,7 +45,7 @@ export default class About extends Component {
           <div className="col-6 mb-3">
             <img
               src={ItamarMelamed}
-              style={{Height: '370px'}}
+              style={{height: 370}}
               className="img-fluid"
               alt="itamar"
             />
