@@ -17,6 +17,7 @@ export default function App() {
         <Route path="/about" element={<About />} />
         <Route path="/purchases" element={<MyPurchases />} />
       </Routes>
+
       <Footer />
     </div>
   );
