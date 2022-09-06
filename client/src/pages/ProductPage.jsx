@@ -19,53 +19,50 @@ class ProductPage extends Component {
     // 1. Get the id from the URL.
     // 2. Check if the product with that id exist.
     // 3. Get the product from the database.
-    // 4. Render the page with the appropritate parameters.
+    // 4. Render the page with the appropriate parameters.
 
     getProductById(this.props.params.id).then((product) => {
       this.setState({ product });
-    }); //'0XEkxBv6P'
+    });
   }
 
   render() {
-    console.log("puki bnaya");
-    console.log(this.state.product);
-    //console.log(this.props.params.id)
-
-    //const product = this.state.product;
-
-    const product =
-    {
-      id:          this.state.product.id,
-      name:        this.state.product.product_name,
-      title:       this.state.product.product_name,
-      description: this.state.product.description,
-      price:       this.state.product.price, // $
-      category:    this.state.product.category,
-      inStock:     this.state.product.is_in_stock,
-      imageUrl:    this.state.product.image_url,
-    };
-
-    console.log(product)
-
-    /*
     const product = {
-      product_name: "somthin something somthing",
-      id: "0XEkxBv6P",
-      category: "category 1",
-      description: "description 1",
-      price: 44,
-      is_in_stock: false,
-      image_url:
-        "https://animeshop.co.il/wp-content/uploads/2022/07/20220731_100624-500x500.jpg",
-      origin: "origin 1",
-      character: "character 1",
+      id: this.state.product.id,
+      name: this.state.product.product_name,
+      title: this.state.product.product_name,
+      description: this.state.product.description,
+      price: this.state.product.price, // $
+      category: this.state.product.category,
+      inStock: this.state.product.is_in_stock,
+      imageUrl: this.state.product.image_url,
     };
-    */
 
     // Product InStock //
     let productInStock;
     if (product.inStock == null || !product.inStock) {
       productInStock = <span style={{ color: "red" }}>Not In Stock</span>;
+    }
+
+    // Product Price //
+    const DISCOUNT_PERCENT = 15; // 15%
+    const DISCOUNT_PERCENT_MULTIPLIER = 1.15; // 0.15 + 1.00 = 1.15
+    
+    let productPrice;
+    if (product == null || product.price === "" || product.price === undefined) {
+      productPrice = "";
+    } else {
+      productPrice = (
+        <>
+          <span className="text-decoration-line-through">
+            $ {Math.round(product.price * DISCOUNT_PERCENT_MULTIPLIER * 100) / 100}
+          </span>
+          <span> </span>
+          <span>${product.price}</span>
+          <span> </span>
+          <span style={{ color: "green" }}>{DISCOUNT_PERCENT}% Off</span>
+        </>
+      );
     }
 
     // Product Title Display //
@@ -110,13 +107,8 @@ class ProductPage extends Component {
                 {productTitle}
               </h1>
               <div style={{ textAlign: "left" }}>{productInStock}</div>
-              <div className="fs-5 mb-5" style={{ textAlign: "left" }}>
-                <span className="text-decoration-line-through">
-                  ${Math.round(product.price * 1.15 * 100) / 100}
-                </span>
-                <span> </span>
-                <span>${product.price}</span>
-              </div>
+              <div className="fs-5 mb-5" style={{ textAlign: "left" }}>{productPrice}</div>
+
               <p className="lead">{productDescription}</p>
 
               <div className="d-flex">
@@ -126,7 +118,9 @@ class ProductPage extends Component {
                       <button
                         className="btn btn-danger flex-shrink-0"
                         type="button"
-                        onClick={() => { this.buyNow(this.state.product) }}
+                        onClick={() => {
+                          this.buyNow(this.state.product);
+                        }}
                       >
                         <i className="bi-cart-fill me-1"></i>
                         Buy Now
@@ -138,7 +132,9 @@ class ProductPage extends Component {
                         className="btn btn-danger flex-shrink-0"
                         style={{ display: "inline-block" }}
                         type="button"
-                        onClick={() => { this.addToCart(this.state.product) }}
+                        onClick={() => {
+                          this.addToCart(this.state.product);
+                        }}
                       >
                         <i className="bi-cart-fill me-1"></i>
                         Add to cart
@@ -154,15 +150,13 @@ class ProductPage extends Component {
     );
   }
 
-  buyNow(product)
-  {
-      cartManagement.addProductToCart(product.id);
+  buyNow(product) {
+    cartManagement.addProductToCart(product.id);
   }
 
-  addToCart(product)
-  { 
-      cartManagement.addProductToCart(product.id);
-  }            
+  addToCart(product) {
+    cartManagement.addProductToCart(product.id);
+  }
 }
 
 export default withRouter(ProductPage);
