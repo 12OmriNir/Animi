@@ -3,6 +3,7 @@ import ProductsList from "../components/ProductsList";
 import Filter from "../components/Filter";
 
 const filters = {
+  name : '',
   category : '',
   origin : '',
   character : '',
@@ -27,5 +28,6 @@ const Home = ({products, loadProducts}) =>  {
       <ProductsList products={products} />
     </div>
   );
-  }
+}
+
 export default Home

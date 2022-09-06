@@ -32,7 +32,9 @@ app.get("/api/products", async (req, res) => {
     character: req.query.character,
     minPrice: req.query.minPrice,
     maxPrice: req.query.maxPrice,
+    name: req.query.name
   };
+
   try {
     const products = await getProducts(filters);
     res.send(products);
