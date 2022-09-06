@@ -1,15 +1,18 @@
 import React, { Component } from "react";
+import ItamarMelamed from './Pics/ItamarMelamed.PNG'
+import YoavNachmani from './Pics/YoavNachmani.jpg'
+import OmriNir from './Pics/OmriNir.jpg'
 
 export default class About extends Component {
   render() {
     return (
       <div className="container mt-4">
-        <div class="row">
+        <div className="row">
           <div className="col-6 mb-3">
             <img
-              src="https://i.ytimg.com/vi/ySES_T4FZ1A/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLBw_X2j_L2Rv1Vn8nzKfRctPAc8aA"
-              class="img-fluid"
-              alt="omri"
+              src={OmriNir}
+              style={{maxHeight: 400, maxWidth: 400}}
+              className="mw-auto"
             />
             <h3 className="mt-1">Omri Nir</h3>
             <h5 className="text-secondary">CEO</h5>
@@ -17,8 +20,9 @@ export default class About extends Component {
 
           <div className="col-6 mb-3">
             <img
-              src="https://pbs.twimg.com/ext_tw_video_thumb/1460415678683484163/pu/img/Ji1gBFgG6PtbS1jr?format=jpg&name=large"
-              class="img-fluid"
+              src={YoavNachmani}
+              style={{maxHeight: 400, maxWidth: 400}}
+              className="h-100 w-auto"
               alt="yoav"
             />
             <h3 className="mt-1">Yoav Nahmani</h3>
@@ -28,7 +32,8 @@ export default class About extends Component {
           <div className="col-6 mb-3">
             <img
               src="https://extrachill.com/wp-content/uploads/2022/05/rick-astley-never-gonna-give-you-up.jpeg"
-              class="img-fluid"
+              style={{maxHeight: 400, maxWidth: 400}}
+              className="mw-auto"
               alt="tomer"
 
             />
@@ -38,8 +43,9 @@ export default class About extends Component {
 
           <div className="col-6 mb-3">
             <img
-              src="https://i.ytimg.com/vi/i8a3gjt_Ar0/maxresdefault.jpg"
-              class="img-fluid"
+              src={ItamarMelamed}
+              style={{maxHeight: 400, maxWidth: 400}}
+              className="h-100 w-auto"
               alt="itamar"
             />
             <h3 className="mt-1">Itamar Melamed</h3>

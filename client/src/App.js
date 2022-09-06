@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
 import ProductPage from "./pages/ProductPage";
 import About from "./pages/About";
-import MyPurchases from "./pages/MyPurchases";
+import MyPurchases from "./pages/MyPurcheses/MyPurchases";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer";
 
@@ -17,6 +17,7 @@ export default function App() {
         <Route path="/about" element={<About />} />
         <Route path="/purchases" element={<MyPurchases />} />
       </Routes>
+
       <Footer />
     </div>
   );

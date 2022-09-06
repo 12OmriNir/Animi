@@ -187,7 +187,7 @@ export default class Filter extends Component {
               {this.newSilder()}
               <button
                 type="button"
-                className="btn btn-warning"
+                className="btn btn-danger"
                 onClick={() => this.onFilterChange()}
               >
                 Set Filter
