@@ -1,3 +1,4 @@
+import { Component, useEffect, useState } from "react";
 import "./App.css";
 import Home from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
@@ -6,20 +7,50 @@ import About from "./pages/About";
 import MyPurchases from "./pages/MyPurcheses/MyPurchases";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer";
+import { getProducts } from "./services/productList";
 
-export default function App() {
-  return (
-    <div className="App">
-      <Header />
+const initialFilters = {
+  category : '',
+  origin : '',
+  character : '',
+  minPrice : 0,
+  maxPrice : 1000
+}
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/product/:id" element={<ProductPage />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/purchases" element={<MyPurchases />} />
-      </Routes>
+export default class App extends Component {
+  
+  constructor(props) {
+    super(props)
 
-      <Footer />
-    </div>
-  );
+    this.state = {
+      products : []
+    }
+  }
+
+  componentDidMount = () => {
+    this.loadProducts(initialFilters)
+  }
+
+  loadProducts = async(filters) => {
+    let products = await getProducts(filters);
+    let newState = { ...this.state };
+    newState.products = products;
+    this.setState(newState);
+  }
+  render () {
+    return (
+      <div className="App">
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home products={this.state.products} loadProducts = {this.loadProducts}/>} />
+          <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/purchases" element={<MyPurchases />} />
+        </Routes>
+  
+        <Footer />
+      </div>
+    );
+  }
+  
 }
