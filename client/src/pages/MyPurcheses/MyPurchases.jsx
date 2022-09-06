@@ -80,8 +80,7 @@ export default class MyPurchases extends Component {
               </div>
             </div>
             {lineItems.map((cartItem) => (
-              <div key={cartItem.productId}>
-                <div className="product-body">
+                <div className="product-body" key={cartItem.productId}>
                   <div className="info">
                     <ol>
                       <div className="product-item-photo">
@@ -118,10 +117,10 @@ export default class MyPurchases extends Component {
                         <br />
                         <br />
                         <div className="product-amount-and-price">
-                          <div className="row">
+                          <div className="row-line">
                             <div className="row amount-wrapper col-xs-12 col-lg-12 col-md-12 col-sm-12">
-                              <div className="cartItemAmount_wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-6">
-                                <div className="text-align-left">
+                              <div className="cart-item-amount-wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-6">
+                                <div className="text-align-left quantity-mover">
                                   <span className="quantity_text">
                                     Quantity:{" "}
                                   </span>
@@ -174,29 +173,28 @@ export default class MyPurchases extends Component {
                       </div>
                     </ol>
                   </div>
-                </div>
               </div>
             ))}
             <div className="product-body payment">
-              <div className="row-line col-xs-12 col-lg-12 col-md-12 col-sm-12">
-                <div className="price-wrapper  col-md-4 col-sm-4 col-sma-12 text-align-left payment">
-                  <h4>
+              <div className="row-line col-xs-12 col-lg-12 col-md-12 col-sm-12 payment">
+                <div className="price-wrapper  col-md-4 col-sm-4 col-sma-12">
+                  <h5>
                     Total Price Without Tax: $
                     {(getTotalPrice(lineItems, products) * 0.9).toFixed(2)}
-                  </h4>
+                  </h5>
                 </div>
-                <div className="price-wrapper  col-md-4 col-sm-4 col-sma-12 text-align-left payment">
-                  <h4>Taxes: ${(getTotalPrice(lineItems, products) * 0.1).toFixed(2)}</h4>
+                <div className="price-wrapper  col-md-4 col-sm-4 col-sma-12">
+                  <h5>Taxes: ${(getTotalPrice(lineItems, products) * 0.1).toFixed(2)}</h5>
                 </div>
-                <div className="price-wrapper  col-md-4 col-sm-4 col-sma-12 text-align-left payment">
+                <div className="price-wrapper  col-md-4 col-sm-4 col-sma-12">
                   <h4>Total Price: ${getTotalPrice(lineItems, products).toFixed(2)}</h4>
                 </div>
               </div>
             </div>
           </div>
           <div className="bottom-btn move-to-center">
-            <Link to={"/checkout"}>
-              <button className="btn btn-danger grid">
+            <Link to={"/checkout"} className="grid">
+              <button className="btn btn-danger">
                 Continue to checkout
               </button>
             </Link>

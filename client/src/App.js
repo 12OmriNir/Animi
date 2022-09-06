@@ -9,7 +9,6 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer";
 import { getProducts } from "./services/productList";
 
-
 const initialFilters = {
   category : '',
   origin : '',
