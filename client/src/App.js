@@ -1,6 +1,5 @@
-import { Component, useEffect, useState } from "react";
+import { Component } from "react";
 import "./App.css";
-import Home from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
 import ProductPage from "./pages/ProductPage";
 import About from "./pages/About";
@@ -8,7 +7,8 @@ import MyPurchases from "./pages/MyPurcheses/MyPurchases";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer";
 import { getProducts } from "./services/productList";
-
+import Home from "./pages/Home";
+import { clearCart } from "./utils/cartManagement" // To clear the localStorage at the first load.
 
 const initialFilters = {
   name: '',
@@ -24,12 +24,17 @@ export default class App extends Component {
     super(props)
 
     this.state = {
-      products : []
+      products : [],
+      productsToRender:[]
     }
   }
 
+
+filterProductsByPageNum =()=>{}
+
   componentDidMount = () => {
-    this.loadProducts(initialFilters)
+    clearCart(); // To clear the localStorage at the first load.
+    this.loadProducts(initialFilters);
   }
 
   loadProducts = async(filters) => {

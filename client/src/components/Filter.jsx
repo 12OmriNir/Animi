@@ -70,7 +70,7 @@ export default class Filter extends Component {
           <input
             type="text"
             id="amount"
-            className="App"
+            className="line"
             readOnly
             style={{ border: 0, color: "#000000" }}
           />

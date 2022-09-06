@@ -4,10 +4,9 @@ import { Link } from "react-router-dom";
 const ProductPreview = ({ product }) => {
   return (
     <div className="col-6 col-sm-3">
-      <Link to={`/product/${product.id}`} handler={product} className="default">
+      <Link to={`/product/${product.id}`} className="default">
       <div className="card-inline card">
         <div className="card-body">
-          
             <img
               src={product.image_url}
               style={{maxHeight: 200}}

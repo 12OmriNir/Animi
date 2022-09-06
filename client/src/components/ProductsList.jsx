@@ -6,7 +6,7 @@ export default class ProductsList extends Component {
     const { products } = this.props;
 
     return (
-      <div className="row">
+      <div className="row flex-grow">
         {products.map((product) => (
           <ProductPreview product={product} key={product.id} />
         ))}
