@@ -2,43 +2,62 @@ import { Component } from "react";
 import { Link } from "react-router-dom";
 import "./MyPurchases.css";
 import { FaRegWindowClose, FaPlus, FaMinus } from "react-icons/fa";
+import * as cart from "../../utils/cartManagement";
+import { getProductById } from "../../services/productList";
 
 export default class MyPurchases extends Component {
   state = {
     cartId: "",
     lineItems: [],
+    products: [],
   };
 
-  //getPurchaseIds() -> //Will get the list of IDs that we have added to cart. (CLIENT)
-  //getById() -> //Will get the product from its id. (DATABASE)
-
   componentDidMount() {
-    const cartItems = getCartItems();
+    const id = generateId();
     this.setState({
-      cartId: generateId(),
-      lineItems: cartItems,
+      cartId: id,
     });
+    this.updateCart();
   }
 
+  updateCart = () => {
+    const cartItems = cart.loadFromLocalStorage();
+    let products = [];
+    if (cartItems.length > 0) {
+      cartItems.forEach((cartItem) => {
+        getProductById(cartItem.productId).then((product) => {
+          products.push(product);
+          this.setState({
+            lineItems: cartItems,
+            products: products
+          });
+        });
+      });
+    } else {
+      this.setState({
+        lineItems: [],
+        products: []
+      });
+    }
+  };
+
   removeProduct = (id) => {
-    this.setState({
-      lineItems: this.state.lineItems.filter((item) => item.productId !== id),
-    });
+    cart.removeItemFromProductsArray(id);
+    this.updateCart();
   };
 
   addProductQuantity = (id, num) => {
-    this.setState({
-      lineItems: this.state.lineItems.map((item) => {
-        if (item.productId === id && !(item.quantity === 1 && num < 0)) {
-          item.quantity += num;
-        }
-        return item;
-      }),
-    });
+    cart.addQuantityToExistProduct(id, num);
+    this.updateCart();
+  };
+
+  clearProductsInCart = () => {
+    cart.emptyCart();
+    this.updateCart();
   };
 
   render() {
-    const { cartId, lineItems } = this.state;
+    const { cartId, lineItems, products } = this.state;
     return (
       <div>
         <div className="text-center fixed" id="cart_header">
@@ -52,143 +71,136 @@ export default class MyPurchases extends Component {
           <div className="card">
             <div className="card-header">
               <h6 className="title-products">
-                you have {} items in your shopping cart
+                You have {cart.productsAmountInCart()}{" "}
+                {cart.productsAmountInCart() === 1 ? "item" : "items"} in your
+                shopping cart.
               </h6>
               <div className="float-right extra-padding">
-                <button className="btn btn-danger btn-clear">clear</button>
+                <button className="btn btn-danger btn-clear" onClick={() => this.clearProductsInCart()}>Clear</button>
               </div>
             </div>
-            <div className="product-body">
-              <div className="info">
-                <ol>
-                  <div
-                    className="product-item-photo"
-                    href="//ksp.co.il/?uin=93667"
-                    title="dweffef"
-                  >
-                    <img
-                      className="product-image-photo"
-                      src="//ksp.co.il/shop/items/93667.jpg"
-                      alt="product"
-                    />
-                    <a className="clean-link move-down" href="">
-                      itemName here
-                    </a>
-                    <a className="action delete remove_cart_item">
-                      <FaRegWindowClose
-                        style={{ width: "25px", height: "25px" }}
-                      />
-                    </a>
-                  </div>
-                  <div className="product-item-details">
-                    <div className="product-item-actions"></div>
-                    <strong className="product-item-name"></strong>
-                    <br />
-                    <br />
-                    <div className="product-amount-and-price">
-                      <div className="row">
-                        <div className="row amount-wrapper col-xs-12 col-lg-12 col-md-12 col-sm-12">
-                          <div className="cartItemAmount_wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-6">
-                            <div className="cartItemAmount_wrapper col-xs-12 col-lg-6 col-md-6 col-sm-6 col-sma-6">
-                              <span className="quantity_text">Quantity: </span>
-                              <a className="qntCartChange">
-                                <FaMinus />
-                              </a>
-                              <span className="amount">1</span>
-                              <a className="qntCartChange">
-                                <FaPlus />
-                              </a>
-                            </div>
-                          </div>
-                          <div className="price-wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-12">
-                            <span>Price of a single unit: </span>
-                            <span className="price">45.00 ₪</span>
-                          </div>
-                          <div className="price-wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-12">
-                            <span>Overall price: </span>
-                            <span className="price">45.00 ₪</span>
-                          </div>
-                        </div>
+            {lineItems.map((cartItem) => (
+              <div key={cartItem.productId}>
+                <div className="product-body">
+                  <div className="info">
+                    <ol>
+                      <div className="product-item-photo">
+                        <img
+                          className="product-image-photo"
+                          src={getProductItem(
+                            "image_url",
+                            "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Question_mark.svg/1170px-Question_mark.svg.png",
+                            cartItem.productId,
+                            products
+                          )}
+                          alt="product"
+                        />
+                        <a className="clean-link move-down">
+                          {getProductItem(
+                            "product_name",
+                            "Loading...",
+                            cartItem.productId,
+                            products
+                          )}
+                        </a>
+                        <a className="action delete remove_cart_item">
+                          <FaRegWindowClose
+                            style={{ width: "25px", height: "25px" }}
+                            onClick={() =>
+                              this.removeProduct(cartItem.productId)
+                            }
+                          />
+                        </a>
                       </div>
-                    </div>
-                  </div>
-                </ol>
-              </div>
-            </div>
-            <div className="product-body">
-              <div className="info">
-                <ol>
-                  <div
-                    className="product-item-photo"
-                  >
-                    <img
-                      className="product-image-photo"
-                      src="//ksp.co.il/shop/items/93667.jpg"
-                      alt="product"
-                    />
-                    <a className="clean-link move-down">
-                      itemName here
-                    </a>
-                    <a className="action delete remove_cart_item">
-                      <FaRegWindowClose
-                        style={{ width: "25px", height: "25px" }}
-                      />
-                    </a>
-                  </div>
 
-                  <div className="product-item-details">
-                    <div className="product-item-actions"></div>
-                    <strong className="product-item-name"></strong>
-                    <br />
-                    <br />
-                    <div className="product-amount-and-price">
-                      <div className="row">
-                        <div className="row amount-wrapper col-xs-12 col-lg-12 col-md-12 col-sm-12">
-                          <div className="cartItemAmount_wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-6">
-                            <div className="text-align-left">
-                              <span className="quantity_text">Quantity: </span>
-                              <a className="qntCartChange">
-                                <FaMinus />
-                              </a>
-                              <span className="amount">1</span>
-                              <a className="qntCartChange">
-                                <FaPlus />
-                              </a>
+                      <div className="product-item-details">
+                        <div className="product-item-actions"></div>
+                        <strong className="product-item-name"></strong>
+                        <br />
+                        <br />
+                        <div className="product-amount-and-price">
+                          <div className="row">
+                            <div className="row amount-wrapper col-xs-12 col-lg-12 col-md-12 col-sm-12">
+                              <div className="cartItemAmount_wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-6">
+                                <div className="text-align-left">
+                                  <span className="quantity_text">
+                                    Quantity:{" "}
+                                  </span>
+                                  <a className="qntCartChange">
+                                    <FaMinus 
+                                      onClick={() =>
+                                        this.addProductQuantity(cartItem.productId, -1)
+                                      }
+                                    />
+                                  </a>
+                                  <span className="amount">
+                                    {cartItem.quantity}
+                                  </span>
+                                  <a className="qntCartChange">
+                                    <FaPlus
+                                      onClick={() =>
+                                        this.addProductQuantity(cartItem.productId, 1)
+                                      }
+                                    />
+                                  </a>
+                                </div>
+                              </div>
+                              <div className="price-wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-12">
+                                <span>Price of a single unit: </span>
+                                <span className="price">
+                                  $
+                                  {getProductItem(
+                                    "price",
+                                    0,
+                                    cartItem.productId,
+                                    products
+                                  )}
+                                </span>
+                              </div>
+                              <div className="price-wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-12">
+                                <span>Overall Price: </span>
+                                <span className="price">
+                                  $
+                                  {getProductItem(
+                                    "price",
+                                    0,
+                                    cartItem.productId,
+                                    products
+                                  ) * cartItem.quantity}
+                                </span>
+                              </div>
                             </div>
-                          </div>
-                          <div className="price-wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-12">
-                            <span>Price of a single unit: </span>
-                            <span className="price">45.00 ₪</span>
-                          </div>
-                          <div className="price-wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-12">
-                            <span>Overall price: </span>
-                            <span className="price">45.00 ₪</span>
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </ol>
                   </div>
-                </ol>
+                </div>
+              </div>
+            ))}
+            <div className="product-body payment">
+              <div className="row-line col-xs-12 col-lg-12 col-md-12 col-sm-12">
+                <div className="price-wrapper  col-md-4 col-sm-4 col-sma-12 text-align-left payment">
+                  <h4>
+                    Total Price Without Tax: $
+                    {(getTotalPrice(lineItems, products) * 0.9).toFixed(2)}
+                  </h4>
+                </div>
+                <div className="price-wrapper  col-md-4 col-sm-4 col-sma-12 text-align-left payment">
+                  <h4>Taxes: ${(getTotalPrice(lineItems, products) * 0.1).toFixed(2)}</h4>
+                </div>
+                <div className="price-wrapper  col-md-4 col-sm-4 col-sma-12 text-align-left payment">
+                  <h4>Total Price: ${getTotalPrice(lineItems, products).toFixed(2)}</h4>
+                </div>
               </div>
             </div>
-            <div className="product-body payment">
-            <div className="row-line col-xs-12 col-lg-12 col-md-12 col-sm-12">
-                          <div className="price-wrapper  col-md-4 col-sm-4 col-sma-12 text-align-left payment" >
-                            <h4>total price without tax: </h4>
-                          </div>
-                          <div className="price-wrapper  col-md-4 col-sm-4 col-sma-12 text-align-left payment" >
-                            <h4>taxes: </h4>
-                          </div>
-                          <div className="price-wrapper  col-md-4 col-sm-4 col-sma-12 text-align-left payment" >
-                            <h4>total price: </h4>
-                          </div>
-                        </div>
-                        </div>
           </div>
           <div className="bottom-btn move-to-center">
-            <button className="btn btn-danger grid">
-              Continue to checkout
-            </button>
+            <Link to={"/checkout"}>
+              <button className="btn btn-danger grid">
+                Continue to checkout
+              </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -218,73 +230,22 @@ const generateId = (limit = 20) => {
   return newId;
 };
 
-const getCartItems = () => {
-  const ids = getPurchaseIds();
-  let cartItems = [];
-  ids.forEach((id) => {
-    if (cartItems.includes(id)) {
-      cartItems.map((cartItem) => {
-        if (cartItem.productId === id) {
-          cartItem.quantity++;
-        }
-        return cartItem;
-      });
-    } else {
-      const newCartProduct = {
-        productId: id,
-        quantity: 1,
-      };
-      cartItems.push(newCartProduct);
-    }
-  });
-  return cartItems;
+const getProductItem = (item, replacement, id, products) => {
+  return (products.length > 0
+    ? products.find((product) => product.id === id) === undefined
+      ? "..."
+      : products.find((product) => product.id === id)[item]
+    : replacement);
 };
 
-const getTotalPrice = (items) => {
+const getTotalPrice = (lineItems, products) => {
   let prices = [];
-  items.forEach((item) => {
-    prices.push(getById(item.productId).price * item.quantity);
+  lineItems.forEach((item) => {
+    prices.push(
+      getProductItem("price", 0, item.productId, products) * item.quantity
+    );
   });
-  return prices.reduce((prevPrice, currPrice) => prevPrice + currPrice, 0);
+  return products.length > 0
+    ? prices.reduce((prevPrice, currPrice) => prevPrice + currPrice, 0)
+    : 0;
 };
-
-//ONLY FOR EXAMPLE:
-//---------------
-
-const getPurchaseIds = () => {
-  return idsList;
-};
-
-const getById = (id) => {
-  return exampleList.find((product) => product.id === id);
-};
-
-const idsList = ["35-2384jktr-243", "g5340987jg345890g"];
-
-//---------------
-
-const exampleList = [
-  {
-    id: "35-2384jktr-243",
-    product_name: "Something1",
-    description: "First description.",
-    price: 59,
-    is_in_stock: true,
-    character: "ACharacter",
-    origin: "An origin",
-    category: "Toy",
-    image_url:
-      "https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Walter_White_S5B.png/220px-Walter_White_S5B.png",
-  },
-  {
-    id: "g5340987jg345890g",
-    product_name: "Something2",
-    description: "Second description.",
-    price: 28,
-    is_in_stock: false,
-    character: "ACharacter",
-    origin: "An origin",
-    category: "Toy",
-    image_url: "https://i.insider.com/5dade9bc045a3139e8686c33?width=700",
-  },
-];
