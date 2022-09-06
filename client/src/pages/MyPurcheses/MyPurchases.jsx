@@ -44,7 +44,7 @@ export default class MyPurchases extends Component {
         <div className="text-center fixed" id="cart_header">
           <div>
             <div className="col col-lg-12 col-xl-12 col-sm-12 col-xs-12">
-              <h1>עגלת הקניות שלכם</h1>
+              <h1>My Purchases</h1>
             </div>
           </div>
         </div>
@@ -61,7 +61,7 @@ export default class MyPurchases extends Component {
             <div className="product-body">
               <div className="info">
                 <ol>
-                  <a
+                  <div
                     className="product-item-photo"
                     href="//ksp.co.il/?uin=93667"
                     title="dweffef"
@@ -69,17 +69,17 @@ export default class MyPurchases extends Component {
                     <img
                       className="product-image-photo"
                       src="//ksp.co.il/shop/items/93667.jpg"
-                      alt="photo"
+                      alt="product"
                     />
-                  </a>
-                  <a className="clean-link" href="">
-                    <strong>itemName here</strong>
-                  </a>
-                  <a className="action delete remove_cart_item">
-                    <FaRegWindowClose
-                      style={{ width: "25px", height: "25px" }}
-                    />
-                  </a>
+                    <a className="clean-link move-down" href="">
+                      itemName here
+                    </a>
+                    <a className="action delete remove_cart_item">
+                      <FaRegWindowClose
+                        style={{ width: "25px", height: "25px" }}
+                      />
+                    </a>
+                  </div>
                   <div className="product-item-details">
                     <div className="product-item-actions"></div>
                     <strong className="product-item-name"></strong>
@@ -100,11 +100,11 @@ export default class MyPurchases extends Component {
                               </a>
                             </div>
                           </div>
-                          <div className="price-wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-12  text-align-left ">
+                          <div className="price-wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-12">
                             <span>Price of a single unit: </span>
                             <span className="price">45.00 ₪</span>
                           </div>
-                          <div className="price-wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-12  text-align-left ">
+                          <div className="price-wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-12">
                             <span>Overall price: </span>
                             <span className="price">45.00 ₪</span>
                           </div>
@@ -118,25 +118,24 @@ export default class MyPurchases extends Component {
             <div className="product-body">
               <div className="info">
                 <ol>
-                  <a
+                  <div
                     className="product-item-photo"
-                    href="//ksp.co.il/?uin=93667"
-                    title="dweffef"
                   >
                     <img
                       className="product-image-photo"
                       src="//ksp.co.il/shop/items/93667.jpg"
-                      alt="photo"
+                      alt="product"
                     />
-                  </a>
-                  <a className="clean-link" href="">
-                    <strong>itemName here</strong>
-                  </a>
-                  <a className="action delete remove_cart_item">
-                    <FaRegWindowClose
-                      style={{ width: "25px", height: "25px" }}
-                    />
-                  </a>
+                    <a className="clean-link move-down">
+                      itemName here
+                    </a>
+                    <a className="action delete remove_cart_item">
+                      <FaRegWindowClose
+                        style={{ width: "25px", height: "25px" }}
+                      />
+                    </a>
+                  </div>
+
                   <div className="product-item-details">
                     <div className="product-item-actions"></div>
                     <strong className="product-item-name"></strong>
@@ -146,22 +145,22 @@ export default class MyPurchases extends Component {
                       <div className="row">
                         <div className="row amount-wrapper col-xs-12 col-lg-12 col-md-12 col-sm-12">
                           <div className="cartItemAmount_wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-6">
-                            <div class="cartItemAmount_wrapper col-xs-12 col-lg-6 col-md-6 col-sm-6 col-sma-6">
-                              <span class="quantity_text">Quantity: </span>
-                              <a class="qntCartChange">
+                            <div className="text-align-left">
+                              <span className="quantity_text">Quantity: </span>
+                              <a className="qntCartChange">
                                 <FaMinus />
                               </a>
                               <span className="amount">1</span>
-                              <a class="qntCartChange">
+                              <a className="qntCartChange">
                                 <FaPlus />
                               </a>
                             </div>
                           </div>
-                          <div className="price-wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-12  text-align-left ">
+                          <div className="price-wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-12">
                             <span>Price of a single unit: </span>
                             <span className="price">45.00 ₪</span>
                           </div>
-                          <div className="price-wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-12  text-align-left ">
+                          <div className="price-wrapper col-xs-12 col-lg-4 col-md-4 col-sm-4 col-sma-12">
                             <span>Overall price: </span>
                             <span className="price">45.00 ₪</span>
                           </div>
@@ -169,12 +168,22 @@ export default class MyPurchases extends Component {
                       </div>
                     </div>
                   </div>
-                  <h4 className="col-xs-12 col-lg-9 col-md-1 col-sm-1 col-sma-12 text-align-right">
-                    Total Price:{" "}
-                  </h4>
                 </ol>
               </div>
             </div>
+            <div className="product-body payment">
+            <div className="row-line col-xs-12 col-lg-12 col-md-12 col-sm-12">
+                          <div className="price-wrapper  col-md-4 col-sm-4 col-sma-12 text-align-left payment" >
+                            <h4>total price without tax: </h4>
+                          </div>
+                          <div className="price-wrapper  col-md-4 col-sm-4 col-sma-12 text-align-left payment" >
+                            <h4>taxes: </h4>
+                          </div>
+                          <div className="price-wrapper  col-md-4 col-sm-4 col-sma-12 text-align-left payment" >
+                            <h4>total price: </h4>
+                          </div>
+                        </div>
+                        </div>
           </div>
           <div className="bottom-btn move-to-center">
             <button className="btn btn-danger grid">
