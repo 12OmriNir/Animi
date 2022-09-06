@@ -8,6 +8,7 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer";
 import { getProducts } from "./services/productList";
 import Home from "./pages/Home";
+import { clearCart } from "./utils/cartManagement" // To clear the localStorage at the first load.
 
 const initialFilters = {
   category : '',
@@ -32,7 +33,8 @@ export default class App extends Component {
 filterProductsByPageNum =()=>{}
 
   componentDidMount = () => {
-    this.loadProducts(initialFilters)
+    clearCart(); // To clear the localStorage at the first load.
+    this.loadProducts(initialFilters);
   }
 
   loadProducts = async(filters) => {
