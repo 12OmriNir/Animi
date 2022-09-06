@@ -6,6 +6,7 @@ const {
   deleteProduct,
   getProducts,
   getProductById,
+  getProductIdByName,
 } = require("./queries");
 const app = express();
 app.use(express.json());
