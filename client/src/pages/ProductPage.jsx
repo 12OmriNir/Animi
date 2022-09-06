@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Image from "../components/Image";
 import ProductNotFoundImage from "../components/ProductNotFoundImage";
 import { getProductById } from "../services/productList";
+import * as cartManagement from "../utils/cartManagement";
 
 class ProductPage extends Component {
   constructor(props) {
@@ -21,47 +22,69 @@ class ProductPage extends Component {
     // 4. Render the page with the appropritate parameters.
 
     getProductById(this.props.params.id).then((product) => {
-      console.log(product);
+      this.setState({ product });
     }); //'0XEkxBv6P'
   }
 
   render() {
-    const product = {
-      id: 1,
-      name: "asdfadsf",
-      title: "Title",
-      description: "Description",
-      price: "49.99", // $
-      category: "Doll",
-      inStock: false,
-      imageUrl: "",
+    console.log("puki bnaya");
+    console.log(this.state.product);
+    //console.log(this.props.params.id)
+
+    //const product = this.state.product;
+
+    const product =
+    {
+      id:          this.state.product.id,
+      name:        this.state.product.product_name,
+      title:       this.state.product.product_name,
+      description: this.state.product.description,
+      price:       this.state.product.price, // $
+      category:    this.state.product.category,
+      inStock:     this.state.product.is_in_stock,
+      imageUrl:    this.state.product.image_url,
     };
 
-    console.log(this.props.params.id);
+    console.log(product)
 
-    // =============== //
+    /*
+    const product = {
+      product_name: "somthin something somthing",
+      id: "0XEkxBv6P",
+      category: "category 1",
+      description: "description 1",
+      price: 44,
+      is_in_stock: false,
+      image_url:
+        "https://animeshop.co.il/wp-content/uploads/2022/07/20220731_100624-500x500.jpg",
+      origin: "origin 1",
+      character: "character 1",
+    };
+    */
+
     // Product InStock //
-    // =============== //
     let productInStock;
     if (product.inStock == null || !product.inStock) {
       productInStock = <span style={{ color: "red" }}>Not In Stock</span>;
     }
-    // =============== //
 
-    // ===================== //
     // Product Title Display //
-    // ===================== //
     let productTitle = "";
     if (product.title == null || product.title === "") {
       productTitle = "Product Not Found";
     } else {
       productTitle = product.title;
     }
-    // ===================== //
 
-    // ===================== //
+    // productDescription //
+    let productDescription;
+    if (product == null || product.description === "") {
+      productDescription = "Product Not Found";
+    } else {
+      productDescription = product.description;
+    }
+
     // Product Image Display //
-    // ===================== //
     let productImage;
     if (product.imageUrl == null || product.imageUrl === "") {
       productImage = (
@@ -70,7 +93,7 @@ class ProductPage extends Component {
     } else {
       productImage = (
         <Image
-          src={""}
+          src={product.imageUrl}
           alt={"Product Image"}
           className="card-img-top mb-5 mb-md-0"
         />
@@ -94,34 +117,28 @@ class ProductPage extends Component {
                 <span> </span>
                 <span>${product.price}</span>
               </div>
-              <p className="lead">
-                Description description description description description
-                description description description description description
-                description description description description description
-                description description description description description
-                description description description description description
-                description description description description description
-              </p>
+              <p className="lead">{productDescription}</p>
+
               <div className="d-flex">
                 <form>
                   <div className="buttonsContainer">
-                    <Link to={"/purchases"}>
+                    <Link to={"/checkout"}>
                       <button
                         className="btn btn-danger flex-shrink-0"
                         type="button"
-                        onClick={() => {}}
+                        onClick={() => { this.buyNow(this.state.product) }}
                       >
                         <i className="bi-cart-fill me-1"></i>
                         Buy Now
                       </button>
                     </Link>
                     <span> </span>
-                    <Link to={"/pageNotFound"}>
+                    <Link to={"/purchases"}>
                       <button
                         className="btn btn-danger flex-shrink-0"
                         style={{ display: "inline-block" }}
                         type="button"
-                        onClick={() => {}}
+                        onClick={() => { this.addToCart(this.state.product) }}
                       >
                         <i className="bi-cart-fill me-1"></i>
                         Add to cart
@@ -136,6 +153,16 @@ class ProductPage extends Component {
       </div>
     );
   }
+
+  buyNow(product)
+  {
+      cartManagement.addProductToCart(product.id);
+  }
+
+  addToCart(product)
+  { 
+      cartManagement.addProductToCart(product.id);
+  }            
 }
 
 export default withRouter(ProductPage);
