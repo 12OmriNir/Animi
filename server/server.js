@@ -9,9 +9,10 @@ const {
   getProductIdByName,
 } = require("./queries");
 const app = express();
+const config = require('./config');
 app.use(express.json());
 app.use(cors());
-const PORT = 3000;
+const PORT = config.port;
 
 app.use(cors());
 app.use(function (req, res, next) {
@@ -32,7 +33,9 @@ app.get("/api/products", async (req, res) => {
     character: req.query.character,
     minPrice: req.query.minPrice,
     maxPrice: req.query.maxPrice,
+    name: req.query.name
   };
+
   try {
     const products = await getProducts(filters);
     res.send(products);

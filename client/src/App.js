@@ -8,9 +8,9 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer";
 import { getProducts } from "./services/productList";
 import Home from "./pages/Home";
-import { clearCart } from "./utils/cartManagement" // To clear the localStorage at the first load.
 
 const initialFilters = {
+  name: '',
   category : '',
   origin : '',
   character : '',
@@ -19,7 +19,6 @@ const initialFilters = {
 }
 
 export default class App extends Component {
-  
   constructor(props) {
     super(props)
 
@@ -33,12 +32,13 @@ export default class App extends Component {
 filterProductsByPageNum =()=>{}
 
   componentDidMount = () => {
-    clearCart(); // To clear the localStorage at the first load.
     this.loadProducts(initialFilters);
   }
 
   loadProducts = async(filters) => {
+    console.log(filters)
     let products = await getProducts(filters);
+    console.log(products)
     let newState = { ...this.state };
     newState.products = products;
     this.setState(newState);
@@ -46,7 +46,7 @@ filterProductsByPageNum =()=>{}
   render () {
     return (
       <div className="App">
-        <Header />
+        <Header loadProducts = {this.loadProducts}/>
         <Routes>
           <Route path="/" element={<Home products={this.state.products} loadProducts = {this.loadProducts}/>} />
           <Route path="/product/:id" element={<ProductPage />} />
