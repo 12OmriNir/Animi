@@ -2,6 +2,7 @@ import React from "react";
 import ProductsList from "../components/ProductsList";
 import Filter from "../components/Filter";
 
+
 const filters = {
   name : '',
   category : '',
@@ -11,7 +12,8 @@ const filters = {
   maxPrice : 1000
 }
 
-const Home = ({products, loadProducts}) =>  {
+
+const Home = ({products, loadProducts,isManagerOnline,password}) =>  {
   
   const filterProducts = (charFilter, originFilter, categoryFilter, priceMinFilter, priceMaxFilter) => {
     filters.character = charFilter;
@@ -22,10 +24,12 @@ const Home = ({products, loadProducts}) =>  {
     loadProducts(filters)
   }
 
+
   return (
-    <div className="container d-lg-flex gap-lg-3 gap-lg-3 main-fix">
-      <Filter products={products} filterProducts={filterProducts} />
-      <ProductsList products={products} />
+    <div><div className="container d-lg-flex gap-lg-3 gap-lg-3 main-fix">
+      <Filter products={products} key={products.id}  filterProducts={filterProducts} password={password} isManagerOnline={isManagerOnline} />
+      <ProductsList products={products} key={products.id} />
+    </div>
     </div>
   );
 }

@@ -67,6 +67,16 @@ body{
 }
 
 
+.form-flex{
+  align-items: center;
+  display: flex;
+  margin-top: 50px;
+}
+
+.form-input{
+  width: max-content;
+}
+
 .flex-grow{
   flex-grow: 1;
 }

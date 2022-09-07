@@ -1,9 +1,11 @@
 import $ from "jquery";
 import { Component } from "react";
+import { Link } from "react-router-dom";
 import "jquery-ui/dist/themes/base/jquery-ui.css";
 import "jquery/dist/jquery.js";
 import "jquery-ui/dist/jquery-ui.js";
 import * as test from "../services/productList";
+
 
 export default class Filter extends Component {
   constructor(props) {
@@ -65,8 +67,8 @@ export default class Filter extends Component {
       <div className="list-group-item">
         <p>
           <label htmlFor="amount">(Price):</label>
-          <p></p>
-          <p></p>
+<br/>
+<br/>
           <input
             type="text"
             id="amount"
@@ -84,8 +86,8 @@ export default class Filter extends Component {
     return (
       <div className="list-group-item">
         <label htmlFor={id}>{label}</label>
-        <p></p>
-        <p></p>
+        <br/>
+<br/>
         <select
           id={id}
           name={name}
@@ -93,7 +95,7 @@ export default class Filter extends Component {
           onChange={this.onValueUpdate}
           value={value}
         >
-          <option value="" selected>
+          <option>
             {initial}
           </option>
           {this.spreadOptions(options)}
@@ -150,6 +152,7 @@ export default class Filter extends Component {
       origins,
       categories,
     } = this.state;
+    const { isManagerOnline } = this.props
     return (
       <section className="filter-container">
         <div>
@@ -195,6 +198,12 @@ export default class Filter extends Component {
             </ul>
           </div>
         </div>
+        {isManagerOnline&& (
+          <div>
+            <li className="btn btn-success">
+              <Link to={`/manager/${this.props.password}/addProduct`} className="navbar-brand">AddProduct</Link></li>
+          </div>
+        ) }
       </section>
     );
   }
