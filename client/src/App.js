@@ -9,6 +9,8 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer";
 import { getProducts, addProduct } from "./services/productList";
 import Home from "./pages/Home";
+import { clearCart } from "./utils/cartManagement" // To clear the localStorage at the first load.
+import CheckoutPage from "./pages/CheckoutPage";
 const ADMIN_PASSWORD = "sC+8XQI=S4Ma-He{-VPtPtn-QEf+.&i0";
 
 const initialFilters = {
@@ -18,6 +20,7 @@ const initialFilters = {
   minPrice: 0,
   maxPrice: 1000,
 };
+
 
 export default class App extends Component {
   constructor(props) {
@@ -61,6 +64,7 @@ export default class App extends Component {
     this.loadProducts(initialFilters);
   };
 
+
   loadProducts = async (filters) => {
     let products = await getProducts(filters);
     let newState = { ...this.state };
@@ -71,7 +75,7 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header />
+        <Header loadProducts = {this.loadProducts}/>
         <Routes>
           <Route
             path="/"
@@ -102,10 +106,14 @@ export default class App extends Component {
             }
           />
           <Route path="/purchases" element={<MyPurchases />} />
+
           <Route
             path="/manager/:password/addProduct"
             element={<AddProduct productAdded={this.addProduct} />}
           />
+
+          <Route path="/checkout" element={<CheckoutPage />} />
+
         </Routes>
 
         <Footer />

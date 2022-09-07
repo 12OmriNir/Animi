@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import NavigationBarImageLogo from "./NavigationBarImageLogo";
 import { getProducts } from "../../../services/productList";
 import { useNavigate } from "react-router-dom";
+import { loadFromLocalStorage, productsAmountInCart } from "../../../utils/cartManagement";
 /**
  * The purpose of the 'NavigationBar' component is to navigate between different pages of the website.
  * This component is placed at the top of the main page, inside the header.
@@ -18,26 +19,7 @@ export default class NavigationBar extends Component {
 
     this.state = {
       productName: '',
-      listOfProducts : [],
     }
-  }
-
-  componentDidMount = () => {
-    this.loadState()
-  }
-
-  loadState = async () => {
-    let list = await getProducts({
-      category : '',
-      origin : '',
-      character : '',
-      minPrice : 0,
-      maxPrice : 1000
-    })
-
-    let newState = {...this.state}
-    newState.listOfProducts = list.map(product => {return {"name" : product['product_name'], "id" : product['id']}})
-    this.setState(newState)
   }
 
   render() {
@@ -78,7 +60,8 @@ export default class NavigationBar extends Component {
                   onChange={(event) => {this.state.productName = event.target.value}}
                 />
                 <button className="btn btn-danger" type="button" 
-                onClick={() => this.searchForProduct(this.state.productName)}>
+                onClick={() => this.props.
+                loadProducts({name: this.state.productName, category: '', origin: '', character: '', minPrice: 0, maxPrice: 0})}>
                   Search
                 </button>
               </form>
@@ -87,16 +70,5 @@ export default class NavigationBar extends Component {
         </nav>
       </div>
     );
-  }
-
-  searchForProduct = (name) => {
-    const search = this.state.listOfProducts.find((product) => product["name"] === name)
-
-    if(search){
-
-    }
-    else{
-      console.log('Proudct not Found')
-    }
   }
 }

@@ -1,11 +1,13 @@
 export async function getProducts(filters) {
+  const qParams = new URLSearchParams({});
+  for(let key of Object.keys(filters)){
+    if(filters[key]){
+      qParams.set(key, filters[key])
+    }
+  }
+  
   const res = await fetch(
-    `http://localhost:3000/api/products?
-	category=${filters["category"]}
-	&origin=${filters["origin"]}
-	&character=${filters["character"]}
-	&minPrice=${filters["minPrice"]}
-	&maxPrice=${filters["maxPrice"]}`,
+    `http://localhost:3000/api/products?${qParams}`,
     {
       method: "GET",
       headers: { "Content-Type": "application/json" },

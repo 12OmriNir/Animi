@@ -4,6 +4,7 @@ import Filter from "../components/Filter";
 
 
 const filters = {
+  name : '',
   category : '',
   origin : '',
   character : '',
@@ -31,5 +32,6 @@ const Home = ({products, loadProducts,isManagerOnline,password}) =>  {
     </div>
     </div>
   );
-  }
+}
+
 export default Home

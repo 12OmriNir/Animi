@@ -1,11 +1,12 @@
 const Pool = require("pg").Pool;
+import * as config from './config';
 
 const pool = new Pool({
-  host: "localhost",
-  user: "postgres",
-  database: "postgres",
-  password: "Aa123456",
-  port: 5432,
+  host: config.pgHost,
+  user: config.user,
+  database: config.pgDatabase,
+  password: config.pgPassword,
+  port: config.pgPort,
 });
 
 async function query(text, values) {

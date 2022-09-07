@@ -24,34 +24,57 @@ async function deleteProduct(productID) {
 }
 
 async function getProducts(filters) {
-  let currentParams = 3;
+  let text = `SELECT * FROM animi.products`;
+  let currentParams = 0;
+  const wheres = [];
 
-  const values = [filters.minPrice, filters.maxPrice];
-  let text = `SELECT * FROM animi.products WHERE price BETWEEN $1 AND $2`;
+  const values = [];
 
-  if (filters["category"]) {
-    text += ` AND category = ${"$" + currentParams}`;
-    currentParams++;
-    values.push(filters.category);
+  if(filters.minPrice && filters.maxPrice){
+     wheres.push('price BETWEEN $1 AND $2')
+     values.push(filters.minPrice, filters.maxPrice)
+     currentParams += 2
+  }
+  else if(filters.minPrice){
+    wheres.push('price >= $1')
+    values.push(filters.minPrice)
+    currentParams ++
+  }
+  else if(filters.maxPrice){
+    wheres.push('price <= $1')
+    values.push(filters.maxPrice)
+    currentParams ++
   }
 
-  if (filters["origin"]) {
-    text += ` AND origin = ${"$" + currentParams}`;
-    currentParams++;
+  if (filters.category) {
+    wheres.push(`category = ${"$" + ++currentParams}`);
+    values.push(filters.category);
+    
+  }
+
+  if (filters.origin) {
+    wheres.push(`origin = ${"$" + ++currentParams}`);
     values.push(filters.origin);
   }
 
-  if (filters["character"]) {
-    text += ` AND character = ${"$" + currentParams}`;
-    currentParams++;
+  if (filters.character) {
+    wheres(`character = ${"$" + ++currentParams}`);
     values.push(filters.character);
   }
 
+  if(filters.name) {
+    wheres.push(`product_name LIKE $${++currentParams}`) 
+    values.push(filters.name + '%')
+  }
+
+  if(wheres.length){
+    text += ` WHERE ${wheres.join(' AND ')}`
+  }
   try {
     const results = await query(text, values);
     return results.rows;
   } catch (err) {
-    throw err;
+    throw err
   }
 }
 
