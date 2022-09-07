@@ -5,6 +5,7 @@ import "jquery-ui/dist/themes/base/jquery-ui.css";
 import "jquery/dist/jquery.js";
 import "jquery-ui/dist/jquery-ui.js";
 import * as test from "../services/productList";
+import { generateId } from "../pages/MyPurcheses/MyPurchases";
 
 
 export default class Filter extends Component {
@@ -74,7 +75,7 @@ export default class Filter extends Component {
             id="amount"
             className="line"
             readOnly
-            style={{ border: 0, color: "#000000" }}
+            style={{ border: 0, color: "#00000" }}
           />
         </p>
         <div id="slider-range"></div>
