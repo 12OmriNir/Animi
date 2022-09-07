@@ -100,7 +100,7 @@ class CheckoutPage extends Component {
 
           <div className="card-body">
             {this.state.orders.map((order) => (
-              <OrderPreview id={order.productId} quantity={order.quantity} />
+              <OrderPreview key={order.productId} id={order.productId} quantity={order.quantity} />
             ))}
           </div>
         </div>

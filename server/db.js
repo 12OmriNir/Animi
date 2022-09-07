@@ -1,9 +1,9 @@
 const Pool = require("pg").Pool;
-import * as config from './config';
+const config = require('./config');
 
 const pool = new Pool({
   host: config.pgHost,
-  user: config.user,
+  user: config.pgUser,
   database: config.pgDatabase,
   password: config.pgPassword,
   port: config.pgPort,

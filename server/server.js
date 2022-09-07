@@ -27,6 +27,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get("/api/products", async (req, res) => {
+  console.log('params',req.query)
   const filters = {
     category: req.query.category,
     origin: req.query.origin,
@@ -35,6 +36,7 @@ app.get("/api/products", async (req, res) => {
     maxPrice: req.query.maxPrice,
     name: req.query.name
   };
+  console.log(filters)
 
   try {
     const products = await getProducts(filters);

@@ -211,7 +211,7 @@ const getRandomInt = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-const generateId = (limit = 20) => {
+export const generateId = (limit = 20) => {
   let newId = "";
   const list = "abcdefghijklmnopqrstuvwxyz_-?1234567890";
   const chooseCase = Math.random();

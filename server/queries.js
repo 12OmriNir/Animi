@@ -72,6 +72,7 @@ async function getProducts(filters) {
   }
   try {
     const results = await query(text, values);
+    console.log('resultl!!!!!!!!!!!!!!',results)
     return results.rows;
   } catch (err) {
     throw err
