@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import NavigationBarImageLogo from "./NavigationBarImageLogo";
 import { getProducts } from "../../../services/productList";
 import { useNavigate } from "react-router-dom";
+import { loadFromLocalStorage, productsAmountInCart } from "../../../utils/cartManagement";
 /**
  * The purpose of the 'NavigationBar' component is to navigate between different pages of the website.
  * This component is placed at the top of the main page, inside the header.
