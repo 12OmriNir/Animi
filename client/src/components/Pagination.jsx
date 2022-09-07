@@ -5,7 +5,6 @@ export default class Pagination extends Component {
     const { products } = this.props;
 
     return (
-      <nav aria-label="...">
   <ul class="pagination">
     <li class="page-item disabled">
       <a class="page-link">Previous</a>
@@ -19,7 +18,6 @@ export default class Pagination extends Component {
       <a class="page-link" href="#">Next</a>
     </li>
   </ul>
-</nav>
     );
   }
 }

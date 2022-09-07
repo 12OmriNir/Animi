@@ -4,7 +4,19 @@ import YoavNahmani from './Pics/YoavNachmani.jpg'
 import OmriNir from './Pics/OmriNir.jpg'
 
 export default class About extends Component {
+
+
+
   render() {
+    const {adminLogin,isManagerOnline,AdminDisconnect } = this.props
+
+let button 
+if(isManagerOnline){
+button = <button className="btn btn-warning" onClick={() => AdminDisconnect()}>disconnect</button>
+}else{
+button = <button className="btn btn-warning" onClick={() => adminLogin()}>login to admin</button>
+}
+
     return (
       <div className="container mt-4">
         <div className="row">
@@ -51,7 +63,9 @@ export default class About extends Component {
             />
             <h3 className="mt-1">Itamar Melamed</h3>
             <h5 className="text-secondary">CEO</h5>
-
+          </div>
+          <div>
+             {button}
           </div>
         </div>
       </div>

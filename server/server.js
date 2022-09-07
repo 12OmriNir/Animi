@@ -69,7 +69,7 @@ app.post("/api/product", async (req, res) => {
     is_in_stock: req.body.isInStock,
     image_url: req.body.imageUrl,
   };
-
+console.log(newProduct)
   try {
     await addProduct(newProduct);
     res.status(201);
