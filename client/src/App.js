@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import { getProducts } from "./services/productList";
 import Home from "./pages/Home";
 import { clearCart } from "./utils/cartManagement" // To clear the localStorage at the first load.
+import CheckoutPage from "./pages/CheckoutPage";
 
 const initialFilters = {
   name: '',
@@ -38,9 +39,7 @@ filterProductsByPageNum =()=>{}
   }
 
   loadProducts = async(filters) => {
-    console.log(filters)
     let products = await getProducts(filters);
-    console.log(products)
     let newState = { ...this.state };
     newState.products = products;
     this.setState(newState);
@@ -54,6 +53,7 @@ filterProductsByPageNum =()=>{}
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/purchases" element={<MyPurchases />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
         </Routes>
   
         <Footer />
