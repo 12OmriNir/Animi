@@ -34,7 +34,6 @@ export default class App extends Component {
 filterProductsByPageNum =()=>{}
 
   componentDidMount = () => {
-    clearCart(); // To clear the localStorage at the first load.
     this.loadProducts(initialFilters);
   }
 

@@ -9,9 +9,10 @@ const {
   getProductIdByName,
 } = require("./queries");
 const app = express();
+const config = require('./config');
 app.use(express.json());
 app.use(cors());
-const PORT = 3000;
+const PORT = config.port;
 
 app.use(cors());
 app.use(function (req, res, next) {
