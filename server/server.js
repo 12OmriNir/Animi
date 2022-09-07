@@ -1,5 +1,6 @@
 const express = require("express");
 const shortid = require("shortid");
+const path = require("path");
 const cors = require("cors");
 const {
   addProduct,
@@ -9,7 +10,7 @@ const {
   getProductIdByName,
 } = require("./queries");
 const app = express();
-const config = require('./config');
+const config = require("./config");
 app.use(express.json());
 app.use(cors());
 const PORT = config.port;
@@ -33,7 +34,7 @@ app.get("/api/products", async (req, res) => {
     character: req.query.character,
     minPrice: req.query.minPrice,
     maxPrice: req.query.maxPrice,
-    name: req.query.name
+    name: req.query.name,
   };
 
   try {
@@ -92,6 +93,13 @@ app.delete("/api/product/:id", async (req, res) => {
     console.log(error);
     res.sendStatus(500);
   }
+});
+
+app.use(express.static(path.resolve(__dirname, "../client/build")));
+
+const indexPath = path.resolve(__dirname, "../client/build/index.html");
+app.get("*", (req, res) => {
+  res.sendFile(indexPath);
 });
 
 app.listen(PORT, function (err) {

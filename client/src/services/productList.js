@@ -1,7 +1,7 @@
 const API_URL =
   process.env.NODE_ENV === "production"
     ? "https://animie.herokuapp.com"
-    : "http://localhost:300d0";
+    : "http://localhost:3000";
 export async function getProducts(filters) {
   const qParams = new URLSearchParams({});
   for (let key of Object.keys(filters)) {
