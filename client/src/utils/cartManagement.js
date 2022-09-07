@@ -7,7 +7,7 @@ let cartItems = [];
 // Returns the total amount of items in the cart.
 export function productsAmountInCart()
 {
-  if (cartItems == null) { return 0; }
+  if (cartItems === null || cartItems === []) { return 0; }
 
   const totalAmountInCart = cartItems.reduce((prevItem, currItem) => prevItem + currItem.quantity, 0);
   return totalAmountInCart;
